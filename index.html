@@ -1058,22 +1058,313 @@
     });
 
     const locations = [
+      // ═══════════════════════════════════════════
+      // KANTOR PUSAT
+      // ═══════════════════════════════════════════
       { lat: -6.2445, lng: 106.7975, name: 'Kantor Pusat JAGA INDONESIA', address: 'Jl. Cibulan 2 No.10, Petogogan, Kebayoran Baru, Jakarta 12170', phone: '021 7201252 / 0813 8309 4234', type: 'office' },
-      { lat: -6.2255, lng: 106.8095, name: 'The Union Group — Plaza Mutiara', address: 'Plaza Mutiara Lt. 5 Suite 503, Jl. DR. Ide Anak Agung Gde Agung Kav. 1-2, Jakarta Selatan', type: 'client' },
-      { lat: -6.2244, lng: 106.7989, name: 'Union — Plaza Senayan', address: 'Plaza Senayan Ground Floor, Jl. Asia Afrika No.8, Jakarta Pusat', type: 'client' },
-      { lat: -6.2260, lng: 106.8005, name: 'Cork & Screw — Plaza Indonesia', address: 'Plaza Indonesia L.1 Unit J127, Jl. M.H. Thamrin No.28-30, Jakarta Pusat', type: 'client' },
-      { lat: -6.2245, lng: 106.8090, name: 'Cork & Screw — Pacific Place', address: 'Pacific Place Mall Ground Floor Unit 51C, Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan', type: 'client' },
-      { lat: -6.2248, lng: 106.8085, name: 'Roma Osteria & Bar — SCBD', address: 'Sequis Tower Ground Floor, Jl. Jend. Sudirman Kav. 71, SCBD Senayan, Jakarta Selatan', type: 'client' },
-      { lat: -6.2620, lng: 106.7830, name: 'Roma Osteria & Bar — Pondok Indah', address: 'Pondok Indah Mall 3 Ground Floor, Jl. Metro Pondok Indah Kav. IV, Jakarta Selatan', type: 'client' },
-      { lat: -6.2242, lng: 106.8095, name: 'Bistecca — SCBD', address: '18 Parc Place Tower C Ground Floor, Jl. Jenderal Sudirman Kav. 52-53, Jakarta Selatan', type: 'client' },
-      { lat: -6.1070, lng: 106.7390, name: 'Bistecca — PIK Avenue', address: 'PIK Avenue Mall Ground Floor, Jl. Pantai Indah Utara I No. 6, Penjaringan, Jakarta Utara', type: 'client' },
-      { lat: -6.2410, lng: 106.7995, name: 'Sushi Hiro — Senopati', address: 'Jl. Suryo No.24, Senopati, Kebayoran Baru, Jakarta Selatan', type: 'client' },
-      { lat: -6.2255, lng: 106.7990, name: 'Sushi Hiro — Senayan City', address: 'Senayan City Mall Lantai 5, Jl. Asia Afrika, Jakarta Pusat', type: 'client' },
-      { lat: -6.2248, lng: 106.8090, name: 'Basque Bar de Tapas', address: 'Noble House 8th Floor, Jl. DR. Ide Anak Agung Gde Agung No.2, Mega Kuningan, Jakarta Selatan', type: 'client' },
-      { lat: -6.2460, lng: 106.7960, name: 'Loewy', address: 'Jl. Cibulan Raya, Petogogan, Kebayoran Baru, Jakarta Selatan', type: 'client' },
-      { lat: -6.2455, lng: 106.7970, name: 'Cork & Screw Country Club', address: 'Kawasan SCBD, Jakarta Selatan', type: 'client' },
-      { lat: -6.2258, lng: 106.7998, name: 'Milano Caffè — PIK Avenue', address: 'PIK Avenue Mall Ground Floor, Jl. Pantai Indah Kapuk Boulevard, Jakarta Utara', type: 'client' },
-      { lat: -6.2240, lng: 106.8100, name: 'Bar Luca', address: 'Kawasan SCBD, Jakarta Selatan', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // UNION GROUP (11 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.2655, lng: 106.7830, name: 'UNION — Pondok Indah Mall', address: 'Ground Floor, Street Gallery, Jl. Metro Pondok Indah, Jakarta 12310', type: 'client' },
+      { lat: -6.2255, lng: 106.7990, name: 'UNION — Plaza Senayan', address: 'Ground Floor, Jl. Asia Afrika No.8, Jakarta 10270', type: 'client' },
+      { lat: -6.2270, lng: 106.7980, name: 'UNION — Senayan City', address: 'Lower Ground Floor, Jl. Asia Afrika Lot.19, Jakarta 10270', type: 'client' },
+      { lat: -6.1952, lng: 106.8203, name: 'UNION — Grand Indonesia', address: 'Ground Floor, East Mall Central, Jl. M.H. Thamrin No.1, Jakarta', type: 'client' },
+      { lat: -6.1770, lng: 106.7900, name: 'UNION — Central Park Mall', address: 'Ground Floor, Jl. Letjen S. Parman No.28, Jakarta 11470', type: 'client' },
+      { lat: -6.1575, lng: 106.9060, name: 'UNION — Mall Kelapa Gading 3', address: 'Ground Floor, Jl. Boulevard Raya, Kelapa Gading 14240', type: 'client' },
+      { lat: -6.1070, lng: 106.7390, name: 'UNION — PIK Avenue', address: 'Ground Floor, Jl. Pantai Indah Kapuk Boulevard, Jakarta 14470', type: 'client' },
+      { lat: -6.2410, lng: 106.6280, name: 'UNION — Summarecon Mall Serpong', address: 'Downtown Walk, Jl. Boulevard Gading Serpong, Tangerang 15810', type: 'client' },
+      { lat: -6.1870, lng: 106.7380, name: 'UNION — Puri Indah Mall 2', address: 'Ground Floor, Jl. Puri Agung, Jakarta 11610', type: 'client' },
+      { lat: -7.2870, lng: 112.6750, name: 'UNION — Pakuwon Mall Surabaya', address: 'Lower Ground Floor, Jl. Puncak Indah Lontar No.2, Surabaya 60222', type: 'client' },
+      { lat: -7.2620, lng: 112.7390, name: 'UNION — Tunjungan Plaza 5', address: 'Upper Ground, Jl. Jenderal Basuki Rachmat No.8-12, Surabaya 60261', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // WILLIAM'S
+      // ═══════════════════════════════════════════
+      { lat: -6.2360, lng: 106.8010, name: "William's — Senayan", address: 'Jl. Tulodong Atas No.28, RT.6/RW.3, Senayan, Jakarta Selatan 12190', phone: '+62 811-1001-6388', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // SUBI PRIVATE LOUNGE
+      // ═══════════════════════════════════════════
+      { lat: -6.1855, lng: 106.8230, name: 'SUBI Private Lounge — Sari Pacific', address: 'Jl. M.H. Thamrin No.6, Kb. Sirih, Menteng, Jakarta Pusat 10340', phone: '+62 821-3233-3288', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LOEWY
+      // ═══════════════════════════════════════════
+      { lat: -6.2245, lng: 106.8320, name: 'Loewy — Oakwood Mega Kuningan', address: 'Oakwood Lingkar Mega Kuningan No.E42 No.1, Jakarta Selatan 12950', phone: '+62 21-8428-5988', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // PIERRE
+      // ═══════════════════════════════════════════
+      { lat: -6.2410, lng: 106.7995, name: 'Pierre Senopati 39', address: 'Jl. Senopati No.39, Jakarta Selatan 12190', phone: '+62 21-521-3626', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LUUCA — JAKARTA (13 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.1840, lng: 106.8580, name: 'LUUCA Green Pramuka Square', address: 'Jl. Jenderal Ahmad Yani Kav.49, Rawasari, Cempaka Putih, Jakarta Pusat', type: 'client' },
+      { lat: -6.2050, lng: 106.8170, name: 'LUUCA Bendungan Hilir', address: 'Jl. Bendungan Hilir RT 13/RW 6, Tanah Abang, Jakarta Pusat', type: 'client' },
+      { lat: -6.2070, lng: 106.8220, name: 'LUUCA JPM Dukuh Atas', address: 'Jl. Setia Budi Tengah No.29/2, Kuningan, Setiabudi, Jakarta Selatan', type: 'client' },
+      { lat: -6.2240, lng: 106.8425, name: 'LUUCA Kota Kasablanka', address: 'Jl. Raya Casablanca, Menteng Dalam, Tebet, Jakarta Selatan', type: 'client' },
+      { lat: -6.1770, lng: 106.7900, name: 'LUUCA Central Park', address: 'Jl. Letjen S. Parman No.Kav.28, Grogol Petamburan, Jakarta Barat 11470', type: 'client' },
+      { lat: -6.1420, lng: 106.7100, name: 'LUUCA Citra Garden 8', address: 'Jl. Sunset Avenue No.5, Pegadungan, Kalideres, Jakarta Barat 11830', type: 'client' },
+      { lat: -6.1600, lng: 106.7150, name: 'LUUCA Greenlake City', address: 'Komplek Green Lake City Blok E No.007, Duri Kosambi, Cengkareng, Jakarta Barat', type: 'client' },
+      { lat: -6.1350, lng: 106.7000, name: 'LUUCA Kalideres', address: 'Daan Tampak Siring Blok 3A, RT 8/RW 12, Kalideres, Jakarta Barat', type: 'client' },
+      { lat: -6.1920, lng: 106.7850, name: 'LUUCA Kemanggisan', address: 'Jl. Kyai H. Taisir No.11 No.88G, Palmerah, Jakarta Barat 11480', type: 'client' },
+      { lat: -6.1870, lng: 106.7380, name: 'LUUCA Lippo Mall Puri', address: 'Lippo Puri, Jl. Puri Agung No.1, Kembangan Selatan, Jakarta Barat 11610', type: 'client' },
+      { lat: -6.1785, lng: 106.7920, name: 'LUUCA Mall Taman Anggrek', address: 'Jl. Letjen S. Parman, Tanjung Duren Selatan, Grogol Petamburan, Jakarta Barat', type: 'client' },
+      { lat: -6.1130, lng: 106.7930, name: 'LUUCA Pluit', address: 'Muara Karang 259, Blok A6U Kav.22, Jakarta Utara 14450', type: 'client' },
+      { lat: -6.2380, lng: 106.9280, name: 'LUUCA Pondok Kelapa', address: 'Jl. Pondok Kelapa Raya L9, Duren Sawit, Jakarta Timur', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LUUCA — TANGERANG (10 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.2600, lng: 106.6250, name: 'LUUCA Gading Serpong', address: 'Ruko Maggiore Paramount Land 53A, Cihuni, Pagedangan, Tangerang', type: 'client' },
+      { lat: -6.1880, lng: 106.6750, name: 'LUUCA Poris', address: 'Ruko Poris Garden Blok A2 No.1B, Cipondoh Indah, Tangerang', type: 'client' },
+      { lat: -6.2400, lng: 106.6950, name: 'LUUCA Graha Raya', address: 'Jl. Kebayoran Utama No.19 Blok G1, Paku Jaya, Serpong Utara, Tangerang Selatan', type: 'client' },
+      { lat: -6.0900, lng: 106.7100, name: 'LUUCA PIK 2', address: 'Rukan La Riviera RLBC No.12, Kosambi, Kabupaten Tangerang', type: 'client' },
+      { lat: -6.2450, lng: 106.6600, name: 'LUUCA Living World Alam Sutera', address: 'Mall Living World, Jl. Alam Sutera Boulevard Kav.21, Tangerang Selatan 15325', type: 'client' },
+      { lat: -6.2200, lng: 106.6100, name: 'LUUCA Supermall Karawaci', address: 'Jl. Boulevard Diponegoro No.105, Kelapa Dua, Tangerang 15810', type: 'client' },
+      { lat: -6.2650, lng: 106.7150, name: 'LUUCA Bintaro Exchange', address: 'Jl. Lingkar BXC Mall, Pondok Jaya, Pondok Aren, Tangerang Selatan 15227', type: 'client' },
+      { lat: -6.3400, lng: 106.7400, name: 'LUUCA Pamulang', address: 'Jl. Pamulang Permai No.1, Pamulang Barat, Tangerang Selatan', type: 'client' },
+      { lat: -6.2500, lng: 106.5600, name: 'LUUCA Citra Raya', address: 'Ruko Melia Street Market, Jl. Citra Raya Boulevard X, Panongan, Tangerang', type: 'client' },
+      { lat: -6.1780, lng: 106.6300, name: 'LUUCA Mall Tangerang City', address: 'Jl. Jenderal Sudirman No.1, Babakan, Kota Tangerang', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LUUCA — JAWA BARAT & BEKASI (12 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.9270, lng: 107.6350, name: 'LUUCA Mekarwangi Bandung', address: 'Jl. Mekar Utama No.43, Mekarwangi, Bojongloa Kidul, Bandung', type: 'client' },
+      { lat: -6.1850, lng: 106.9800, name: 'LUUCA Harapan Indah', address: 'Jl. Boulevard Hijau Raya, Pejuang, Medan Satria, Bekasi 17131', type: 'client' },
+      { lat: -6.3600, lng: 106.9200, name: 'LUUCA Citra Grand Cibubur', address: 'Citra Grand Cibubur, Jl. Alternatif Cibubur, Jatikarya, Jatisampurna, Bekasi 17435', type: 'client' },
+      { lat: -6.2800, lng: 106.9910, name: 'LUUCA Taman Galaxy Park', address: 'Grand Galaxy City, Jl. Grand Galaxy Boulevard Blok RGF 5, Bekasi', type: 'client' },
+      { lat: -6.2500, lng: 106.9900, name: 'LUUCA Pakuwon Mall Bekasi', address: 'Lantai 2, Jl. Raya Pekayon No.002, Pekayon Jaya, Bekasi Selatan', type: 'client' },
+      { lat: -6.2800, lng: 107.0300, name: 'LUUCA Grand Wisata Bekasi', address: 'Ruko New Westfield ER 5 No.2, Mustikajaya, Bekasi', type: 'client' },
+      { lat: -7.2050, lng: 107.9000, name: 'LUUCA Ramayana Garut', address: 'Jl. Guntur No.40, Pakuwon, Garut Kota, Garut 44117', type: 'client' },
+      { lat: -7.6870, lng: 108.6550, name: 'LUUCA Pangandaran', address: 'Jl. Kidang Pananjung No.181, Pangandaran 46396', type: 'client' },
+      { lat: -6.4830, lng: 106.8480, name: 'LUUCA Cibinong City Mall', address: 'Cibinong City Mall, Jl. Tegar Beriman No.1, Pakansari, Cibinong, Bogor', type: 'client' },
+      { lat: -6.4550, lng: 106.5200, name: 'LUUCA Parung Panjang', address: 'Jl. Sentraland Boulevard, Parung Panjang, Bogor', type: 'client' },
+      { lat: -6.7200, lng: 108.5550, name: 'LUUCA CSB Mall Cirebon', address: 'Super Blok, Jl. Cipto Mangunkusumo No.26, Kesambi, Cirebon', type: 'client' },
+      { lat: -6.8500, lng: 107.9200, name: 'LUUCA Sumedang', address: 'Gg. Ita, Kotakaler, Sumedang Utara, Sumedang', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LUUCA — JAWA TENGAH / YOGYAKARTA (6 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.9930, lng: 110.4200, name: 'LUUCA Ciputra Mall Semarang', address: 'Lantai Dasar, Jl. Simpang Lima No.1, Pekunden, Semarang', type: 'client' },
+      { lat: -7.0470, lng: 110.3140, name: 'LUUCA Uptown Mall BSB City', address: 'Jl. R.M. Hadisoebeno Sosro Wardoyo, Pesantren, Mijen, Semarang 50212', type: 'client' },
+      { lat: -7.7680, lng: 110.4060, name: 'LUUCA Seturan Yogyakarta', address: 'Jl. Seturan Raya No.1, Kledokan, Caturtunggal, Depok, Sleman 55281', type: 'client' },
+      { lat: -7.5640, lng: 110.8020, name: 'LUUCA Square Mall Solo', address: 'Jl. Slamet Riyadi No.451-455, Pajang, Laweyan, Surakarta 57146', type: 'client' },
+      { lat: -7.5720, lng: 110.8180, name: 'LUUCA Gatot Subroto Solo', address: 'Jl. Gatot Subroto No.42, Kemlayan, Serengan, Surakarta', type: 'client' },
+      { lat: -7.3300, lng: 110.5070, name: 'LUUCA Kalibodri Salatiga', address: 'Jl. Kalibodri, Kutowinangun Kidul, Tingkir, Salatiga', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LUUCA — JAWA TIMUR (14 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -7.2850, lng: 112.8000, name: 'LUUCA Pakuwon City Surabaya', address: 'Jl. Kejawan Putih Mutiara, Ruko Patos FRI-7, Sukolilo, Surabaya', type: 'client' },
+      { lat: -7.2880, lng: 112.7250, name: 'LUUCA Royal Plaza Surabaya', address: 'Jl. A. Yani Frontage Barat No.16, Wonokromo, Surabaya 60243', type: 'client' },
+      { lat: -7.2450, lng: 112.7350, name: 'LUUCA BG Junction Surabaya', address: 'BG Junction Mall, Jl. Bubutan No.1-7, L2 Foodcourt, Bubutan, Surabaya', type: 'client' },
+      { lat: -7.2870, lng: 112.6750, name: 'LUUCA Pakuwon Mall Surabaya', address: 'Jl. Mayjend. Jonosewojo, Babatan, Wiyung, Surabaya', type: 'client' },
+      { lat: -7.2620, lng: 112.7390, name: 'LUUCA Tunjungan Plaza Surabaya', address: 'Tunjungan Plaza, Kedungdoro, Tegalsari, Surabaya', type: 'client' },
+      { lat: -7.2400, lng: 112.7480, name: 'LUUCA Plaza Surabaya', address: 'Plaza Surabaya Lt.34, Jl. Pemuda No.2, Embong Kaliasin, Genteng, Surabaya', type: 'client' },
+      { lat: -7.2900, lng: 112.7000, name: 'LUUCA Ciputra World Surabaya', address: 'Gunung Sari, Dukuh Pakis, Surabaya', type: 'client' },
+      { lat: -7.2655, lng: 112.7860, name: 'LUUCA Galaxy Mall Surabaya', address: 'Mulyorejo, Surabaya', type: 'client' },
+      { lat: -7.4500, lng: 112.7000, name: 'LUUCA SunCity Mall Sidoarjo', address: 'Jl. Pahlawan RW 6, Sidokumpul, Sidoarjo 61213', type: 'client' },
+      { lat: -7.4450, lng: 112.7100, name: 'LUUCA Lippo Plaza Sidoarjo', address: 'Jl. Jati Raya No.1, Jati, Sidoarjo', type: 'client' },
+      { lat: -7.9790, lng: 112.6300, name: 'LUUCA Malang Town Square', address: 'Jl. Veteran No.2, Penanggungan, Klojen, Malang 65111', type: 'client' },
+      { lat: -7.9830, lng: 112.6280, name: 'LUUCA MOG Malang', address: 'Jl. Kawi, Kauman, Klojen, Malang', type: 'client' },
+      { lat: -7.4720, lng: 112.4340, name: 'LUUCA Sunrise Mall Mojokerto', address: 'Jl. Benteng Pancasila No.9, Magersari, Mojokerto 61314', type: 'client' },
+      { lat: -7.1530, lng: 112.6510, name: 'LUUCA Icon Mall Gresik', address: 'Icon Mall Lt.2 No.33, Kembangan, Kebomas, Gresik', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LUUCA — KALIMANTAN (22 OUTLET) — Cluster
+      // ═══════════════════════════════════════════
+      { lat: -0.0260, lng: 109.3425, name: 'LUUCA Uray Bawadi Pontianak', address: 'Komplek Java Square, Jl. Uray Bawadi, Pontianak Kota', type: 'client' },
+      { lat: -0.0450, lng: 109.3300, name: 'LUUCA Ayani Megamall Pontianak', address: 'Jl. Jenderal Ahmad Yani, Parit Tokaya, Pontianak Selatan', type: 'client' },
+      { lat: -0.0300, lng: 109.3350, name: 'LUUCA Tanjung Pura Pontianak', address: 'Jl. Tanjung Pura No.238, Benua Melayu Laut, Pontianak Selatan', type: 'client' },
+      { lat: -0.0150, lng: 109.3200, name: 'LUUCA Martadinata Pontianak', address: 'Jl. RE Martadinata, Sungai Jawi Dalam, Pontianak Barat', type: 'client' },
+      { lat: 0.0800, lng: 111.5000, name: 'LUUCA Sintang', address: 'Jl. Lintas Melawi, Ladang, Sintang', type: 'client' },
+      { lat: -0.0250, lng: 109.3400, name: 'LUUCA Pancasila Pontianak', address: 'Jl. Gusti Hamzah No.7, Sungai Jawi, Pontianak Kota', type: 'client' },
+      { lat: -0.0900, lng: 109.3450, name: 'LUUCA Sungai Raya Dalam', address: 'Jl. Sungai Raya Dalam, Bangka Belitung Darat, Kubu Raya', type: 'client' },
+      { lat: -0.0600, lng: 109.3600, name: 'LUUCA Padat Karya Pontianak', address: 'Jl. Padat Karya, Bansir Darat, Pontianak Tenggara', type: 'client' },
+      { lat: -0.0350, lng: 109.3380, name: 'LUUCA Aneka Pavilion Pontianak', address: 'Jl. Sutan Syahrir, Akcaya, Pontianak Selatan', type: 'client' },
+      { lat: -0.0400, lng: 109.3550, name: 'LUUCA Tanjung Raya Pontianak', address: 'Jl. Tanjung Raya II, Banjar Serasan, Pontianak Timur', type: 'client' },
+      { lat: -0.0280, lng: 109.3290, name: 'LUUCA S. Parman Pontianak', address: 'Ruko Villa Palma, Jl. Letjen S. Parman No.A6, Pontianak Selatan', type: 'client' },
+      { lat: -0.3500, lng: 111.7300, name: 'LUUCA Nanga Pinoh', address: 'Paal, Nanga Pinoh, Melawi', type: 'client' },
+      { lat: -1.8500, lng: 109.9800, name: 'LUUCA Ketapang', address: 'Jl. DR. Sutomo, Delta Pawan, Ketapang', type: 'client' },
+      { lat: 0.9050, lng: 108.9850, name: 'LUUCA Alianyang Singkawang', address: 'Jl. Alianyang No.20A, Melayu, Singkawang', type: 'client' },
+      { lat: 0.9100, lng: 108.9900, name: 'LUUCA Grand Mall Singkawang', address: 'Jl. Alianyang, Pasiran, Singkawang', type: 'client' },
+      { lat: 1.3600, lng: 109.3100, name: 'LUUCA Sambas', address: 'Jl. Tabrani No.442, Saing Rambi, Sambas', type: 'client' },
+      { lat: -0.0200, lng: 109.3700, name: 'LUUCA Siantan Pontianak', address: 'Jl. Khatulistiwa, Siantan Tengah, Pontianak Utara 78243', type: 'client' },
+      { lat: -0.1000, lng: 109.3500, name: 'LUUCA Octo Kubu Raya', address: 'Jl. Ahmad Yani II, Sungai Raya, Kubu Raya', type: 'client' },
+      { lat: -0.1050, lng: 109.3550, name: 'LUUCA Gaia Mall City Kubu Raya', address: 'Jl. Arteri Supadio, Sungai Raya, Kubu Raya 78121', type: 'client' },
+      { lat: -1.2660, lng: 116.8320, name: 'LUUCA Pentacity Mall Balikpapan', address: 'Jl. Jenderal Sudirman No.47, Gn. Bahagia, Balikpapan Selatan 76114', type: 'client' },
+      { lat: -0.5020, lng: 117.1520, name: 'LUUCA BigMall Samarinda', address: 'Jl. Big Mall, Karang Asam Ulu, Sungai Kunjang, Samarinda', type: 'client' },
+      { lat: -3.3200, lng: 114.5900, name: 'LUUCA Duta Mall Banjarmasin', address: 'Jl. A. Yani KM 3, Hotel Mercure, Banjarmasin', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LUUCA — SUMATERA (8 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: 3.5820, lng: 98.6780, name: 'LUUCA Centre Point Mall Medan', address: 'Lower Ground (LG) I-10A, Centre Point Mall Medan', type: 'client' },
+      { lat: 3.5920, lng: 98.6660, name: 'LUUCA Plaza Medan Fair', address: 'Plaza Medan Fair, Jl. Gatot Subroto No.30, Sekip, Medan Petisah, Medan 20113', type: 'client' },
+      { lat: -2.1300, lng: 106.1100, name: 'LUUCA Pangkal Pinang', address: 'Jl. Jenderal Sudirman, Gedung Nasional, Taman Sari, Pangkal Pinang', type: 'client' },
+      { lat: 0.5000, lng: 101.4500, name: 'LUUCA Panam Pekanbaru', address: 'Jl. HR. Soebrantas, Tuah Karya, Tampan, Pekanbaru', type: 'client' },
+      { lat: 1.1200, lng: 104.0400, name: 'LUUCA Bengkong Batam', address: 'Jl. Golden City Residence F12, Tanjung Buntung, Bengkong, Batam 29432', type: 'client' },
+      { lat: 1.1150, lng: 104.0450, name: 'LUUCA Green Land Batam', address: 'Jl. Raja M. Tahir, Teluk Tering, Batam Kota, Batam 29444', type: 'client' },
+      { lat: 1.1000, lng: 104.0200, name: 'LUUCA Batu Aji Batam', address: 'Komplek Pertokoan, Jl. Sentosa Perdana Blok Mawar No.19, Sagulung, Batam 29439', type: 'client' },
+      { lat: 0.9200, lng: 104.4500, name: 'LUUCA Tanjung Pinang Kepri', address: 'Jl. Arah Tanjung Uban-Tanjung Pinang Ruko No.16, Air Raja, Tanjungpinang Timur', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LUUCA — SULAWESI (3 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -5.1470, lng: 119.4470, name: 'LUUCA Mall Panakkukang Makassar', address: 'Masale, Panakkukang, Makassar 90231', type: 'client' },
+      { lat: -5.1650, lng: 119.4030, name: 'LUUCA Trans Studio Mall Makassar', address: 'Jl. Metro Tanjung Bunga, Maccini Sombala, Tamalate, Makassar 90024', type: 'client' },
+      { lat: 1.4550, lng: 124.8200, name: 'LUUCA Freshmart Bahu Mall Manado', address: 'Jl. Pertokoan Bahu Mall No.S-01, Malalayang, Manado', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // LUUCA — BALI & NTB (2 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -8.7000, lng: 115.1700, name: 'LUUCA Sunset Road Seminyak', address: 'Jl. Sunset Road No.1, Seminyak, Kuta Utara, Badung 80361', type: 'client' },
+      { lat: -8.5900, lng: 116.1200, name: 'LUUCA Epicentrum Mall Lombok', address: 'Jl. Sriwijaya No.333, Punia, Mataram 83127', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // SUSHI HIRO — JAKARTA SELATAN (10 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.2655, lng: 106.7830, name: 'Sushi Hiro Pondok Indah Mall 1', address: 'PIM 1 Street Gallery Lt.1, Jl. Metro Pondok Indah, Jakarta Selatan', type: 'client' },
+      { lat: -6.2250, lng: 106.7990, name: 'Sushi Hiro Senayan Park', address: 'Senayan Park Mall GF, Jl. Gerbang Pemuda No.3, Senayan', type: 'client' },
+      { lat: -6.2605, lng: 106.8120, name: 'Sushi Hiro Kemang Village', address: 'Kemang Village/Lippo Mall Kemang GF, Jl. Pangeran Antasari', type: 'client' },
+      { lat: -6.2455, lng: 106.7850, name: 'Sushi Hiro Gandaria City', address: 'Gandaria City GF, Jl. Sultan Iskandar Muda', type: 'client' },
+      { lat: -6.2240, lng: 106.8425, name: 'Sushi Hiro Kota Kasablanka', address: 'Kota Kasablanka GF Food Society, Jl. Casablanca Raya', type: 'client' },
+      { lat: -6.2245, lng: 106.8090, name: 'Sushi Hiro Pacific Place', address: 'Pacific Place Mall Lt.5, Jl. Jenderal Sudirman, SCBD', type: 'client' },
+      { lat: -6.2280, lng: 106.8260, name: 'Sushi Hiro One Satrio', address: 'One Satrio, Jl. Prof. Dr. Satrio, Kuningan', type: 'client' },
+      { lat: -6.2255, lng: 106.7995, name: 'Sushi Hiro Lippo Mall Nusantara', address: 'Lippo Mall Nusantara GF, Jl. Jenderal Sudirman', type: 'client' },
+      { lat: -6.2270, lng: 106.7980, name: 'Sushi Hiro Senayan City', address: 'Senayan City Lt.5, Jl. Asia Afrika', type: 'client' },
+      { lat: -6.2410, lng: 106.7995, name: 'Sushi Hiro Senopati', address: 'Jl. Suryo No.24, Senopati, Kebayoran Baru', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // SUSHI HIRO — JAKARTA PUSAT (5 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.1943, lng: 106.8220, name: 'Sushi Hiro Plaza Indonesia', address: 'Plaza Indonesia Lt.2, Jl. M.H. Thamrin', type: 'client' },
+      { lat: -6.1952, lng: 106.8203, name: 'Sushi Hiro Grand Indonesia', address: 'Grand Indonesia West Mall Lt.3A, Jl. M.H. Thamrin', type: 'client' },
+      { lat: -6.1990, lng: 106.8320, name: 'Sushi Hiro Menteng', address: 'Jl. HOS Cokroaminoto No.63, Menteng', type: 'client' },
+      { lat: -6.1865, lng: 106.8230, name: 'Sushi Hiro Sarinah', address: 'Sarinah Building Lt.1, Jl. M.H. Thamrin', type: 'client' },
+      { lat: -6.1570, lng: 106.8550, name: 'Sushi Hiro K Mall Kemayoran', address: 'K Mall UG, Jl. Kota Baru Bandar Kemayoran No.C-8', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // SUSHI HIRO — JAKARTA UTARA (7 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.0900, lng: 106.7100, name: 'Sushi Hiro Orange Groves PIK 2', address: 'Orange Groves PIK 2, Jl. KH Mas Mansyur, PIK', type: 'client' },
+      { lat: -6.1550, lng: 106.8940, name: 'Sushi Hiro Mall of Indonesia', address: 'Mall of Indonesia GF, Jl. Boulevard Barat Raya', type: 'client' },
+      { lat: -6.1070, lng: 106.7390, name: 'Sushi Hiro Cove at Batavia PIK', address: 'Cove at Batavia PIK, Jl. Pantai Indah Kapuk', type: 'client' },
+      { lat: -6.1575, lng: 106.9060, name: 'Sushi Hiro Kelapa Gading', address: 'Jl. Boulevard Raya Blok KGC/A No.1', type: 'client' },
+      { lat: -6.1090, lng: 106.7400, name: 'Sushi Hiro Garden House PIK', address: 'Ruko Garden House Blok B No.18D, Bukit Golf Mediterania, PIK', type: 'client' },
+      { lat: -6.1180, lng: 106.7900, name: 'Sushi Hiro Pluit', address: 'Jl. Pluit Putra Raya No.12A', type: 'client' },
+      { lat: -6.1575, lng: 106.9060, name: 'Sushi Hiro Mall Kelapa Gading 3', address: 'Gourmet Walk GF, Mall Kelapa Gading 3', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // SUSHI HIRO — JAKARTA BARAT (3 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.1770, lng: 106.7890, name: 'Sushi Hiro Neo Soho', address: 'Neo Soho Mall UG, Jl. Letjen S. Parman', type: 'client' },
+      { lat: -6.1785, lng: 106.7920, name: 'Sushi Hiro Mall Taman Anggrek', address: 'Mall Taman Anggrek Lt.4, Jl. Letjen S. Parman', type: 'client' },
+      { lat: -6.1870, lng: 106.7380, name: 'Sushi Hiro Puri', address: 'St Moritz Mall/Lippo Mall Puri Lt.1, Jl. Puri Indah Boulevard Blok U1', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // SUSHI HIRO — TANGERANG (3 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.2410, lng: 106.6280, name: 'Sushi Hiro Summarecon Mall Serpong', address: 'Summarecon Mall Serpong GF Downtown Walk, Jl. Gading Serpong Boulevard', type: 'client' },
+      { lat: -6.2650, lng: 106.7150, name: 'Sushi Hiro Bintaro Jaya Xchange', address: 'Bintaro Jaya Xchange Mall GF, Jl. Boulevard Bintaro Jaya', type: 'client' },
+      { lat: -6.2700, lng: 106.7100, name: 'Sushi Hiro Bintaro', address: 'Jl. Cut Mutia II, Bintaro Sektor 7', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // SUSHI HIRO — DEPOK & BEKASI (3 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.3770, lng: 106.8330, name: 'Sushi Hiro Margo City', address: 'Margo City Lt.2, Jl. Margonda Raya, Beji, Depok', type: 'client' },
+      { lat: -6.2500, lng: 106.9900, name: 'Sushi Hiro Pakuwon Mall Bekasi', address: 'Pakuwon Mall Bekasi, Jl. Raya Pekayon No.2', type: 'client' },
+      { lat: -6.2200, lng: 107.0000, name: 'Sushi Hiro BCBD Summarecon Bekasi', address: 'La Spezia, Jl. Bulevar Ahmad Yani No.56A-B', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // SUSHI HIRO — BANDUNG (5 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.9140, lng: 107.5920, name: 'Sushi Hiro 23 Paskal', address: '23 Paskal Shopping Center Lt.1, Jl. Pasir Kaliki No.25-27', type: 'client' },
+      { lat: -6.9270, lng: 107.6760, name: 'Sushi Hiro Summarecon Mall Bandung', address: 'Summarecon Mall Bandung GF, Jl. Bulevar Utama, Gede Bage', type: 'client' },
+      { lat: -6.8930, lng: 107.6180, name: 'Sushi Hiro Diponegoro', address: 'Jl. Diponegoro No.3, Dago Bawah', type: 'client' },
+      { lat: -6.8890, lng: 107.5960, name: 'Sushi Hiro Paris Van Java', address: 'Paris Van Java GF, Jl. Sukajadi No.137-139', type: 'client' },
+      { lat: -6.9270, lng: 107.6350, name: 'Sushi Hiro Trans Studio Mall', address: 'Trans Studio Mall GF, Jl. Gatot Subroto No.289', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // SUSHI HIRO — SURABAYA (4 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -7.2810, lng: 112.7850, name: 'Sushi Hiro Manyar', address: 'Jl. Manyar Kertoarjo No.71, Surabaya', type: 'client' },
+      { lat: -7.2620, lng: 112.7390, name: 'Sushi Hiro Tunjungan Plaza 5', address: 'Tunjungan Plaza 5 Lt.3, Jl. Basuki Rahmat No.8-12', type: 'client' },
+      { lat: -7.2655, lng: 112.7860, name: 'Sushi Hiro Galaxy Mall 1', address: 'Galaxy Mall 1 GF, Jl. Dharmahusada Indah Timur', type: 'client' },
+      { lat: -7.2900, lng: 112.6750, name: 'Sushi Hiro West Market by Comunale', address: 'Jl. Mayjend Jonosewojo No.7, Dukuh Pakis, Surabaya', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // OYSTER DEALER
+      // ═══════════════════════════════════════════
+      { lat: -6.1070, lng: 106.7400, name: 'Oyster Dealer', address: 'Ruko RB 2V No.5, Cove Batavia, Jalasena Golf Island, PIK, Jakarta 14470', phone: '+62 877-7722-3000', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // ROMA OSTERIA & BAR (2 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.2655, lng: 106.7830, name: 'Roma — Pondok Indah Mall 3', address: 'PIM 3 GF, Jl. Kartika Utama No.1, Pondok Indah, Jakarta Selatan', type: 'client' },
+      { lat: -6.2245, lng: 106.8085, name: 'Roma — Sequis Tower', address: 'Sequis Tower GF #03-01, Jl. Jend. Sudirman Kav.71, Jakarta 12190', phone: '+62 21-2709-1888', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // OASIS SHISHA LOUNGE
+      // ═══════════════════════════════════════════
+      { lat: -6.1100, lng: 106.7400, name: 'Oasis Shisha PIK', address: 'Rukan Garden House Blok B No.17-18A Lt.2, PIK, Penjaringan, Jakarta Utara 14440', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // BISTECCA (2 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.1070, lng: 106.7390, name: 'Bistecca PIK Avenue', address: 'Jl. Pantai Indah Kapuk Boulevard, PIK, Jakarta 14470', type: 'client' },
+      { lat: -6.2242, lng: 106.8095, name: 'Bistecca 18 Parc Place SCBD', address: '18 Parc Place Tower C GF, Jl. Jend. Sudirman No.52-53, SCBD, Jakarta 12190', phone: '+62 21-515-1660', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // BASQUE BAR DE TAPAS
+      // ═══════════════════════════════════════════
+      { lat: -6.2248, lng: 106.8090, name: 'Basque Bar de Tapas', address: 'Noble House 8th Floor, Jl. DR. Ide Anak Agung Gde Agung No.2, Mega Kuningan, Jakarta Selatan 12950', phone: '+62 819-2978-3111', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // CORK & SCREW (2 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.1943, lng: 106.8220, name: 'Cork & Screw — Plaza Indonesia', address: 'Plaza Indonesia 1st Floor Unit 127 A-D, Jl. M.H. Thamrin No.28-30, Jakarta 10350', phone: '+62 21-3199-6659', type: 'client' },
+      { lat: -6.2245, lng: 106.8090, name: 'Cork & Screw — Pacific Place', address: 'Pacific Place GF Unit 51C, Jl. Jend. Sudirman No.52-53, SCBD, Jakarta 12190', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // CORK & SCREW COUNTRY CLUB
+      // ═══════════════════════════════════════════
+      { lat: -6.2245, lng: 106.7990, name: 'Cork & Screw Country Club', address: 'Jl. Asia Afrika Pintu IX, Senayan, Jakarta Pusat 10270', phone: '+62 21-570-6364', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // CAFFÈ MILANO (2 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.1952, lng: 106.8203, name: 'Caffè Milano — Grand Indonesia', address: 'East Mall Central, Jl. M.H. Thamrin No.1, Jakarta 10310', phone: '+62 21-2358-0638', type: 'client' },
+      { lat: -6.1070, lng: 106.7390, name: 'Caffè Milano — PIK Avenue', address: 'Jl. Pantai Indah Kapuk Boulevard, Jakarta 14470', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // 3 WISE MONKEYS
+      // ═══════════════════════════════════════════
+      { lat: -6.1880, lng: 106.8320, name: '3 Wise Monkeys', address: 'Jl. Teuku Umar No.40, Gondangdia, Menteng, Jakarta Pusat 10350', phone: '+62 812-1177-7746', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // BAR LUCA
+      // ═══════════════════════════════════════════
+      { lat: -6.2245, lng: 106.8085, name: 'Bar Luca', address: '18 Parc Place Tower B GF No.19, Jl. Jend. Sudirman Kav.52-53, Senayan, Jakarta 12190', phone: '+62 822-1828-1868', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // THE COCKTAIL CLUB
+      // ═══════════════════════════════════════════
+      { lat: -6.2410, lng: 106.7995, name: 'The Cocktail Club Senopati', address: 'Jl. Senopati No.39, Senayan, Kebayoran Baru, Jakarta 12190', phone: '+62 813-1888-2068', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // HURRICANE'S GRILL (2 OUTLET)
+      // ═══════════════════════════════════════════
+      { lat: -6.2360, lng: 106.8010, name: "Hurricane's Grill Jakarta", address: 'Jl. Gunawarman No.20, Selong, Kebayoran Baru, Jakarta Selatan 12110', phone: '+62 21-2751-3388', type: 'client' },
+      { lat: -7.2880, lng: 112.7380, name: "Hurricane's Grill Surabaya", address: 'Jl. Imam Bonjol No.119, Tegalsari, Surabaya', type: 'client' },
+    
+      // ═══════════════════════════════════════════
+      // BENGKEL SPACE
+      // ═══════════════════════════════════════════
+      { lat: -6.2245, lng: 106.8085, name: 'Bengkel Space', address: 'Fairgrounds SCBD Lot 14, Jl. Jend. Sudirman Kav.52-53, Senayan, Jakarta Selatan 12190', phone: '+62 812-2335-5875', type: 'client' },
     ];
 
     const markers = L.markerClusterGroup({
