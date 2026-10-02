@@ -7,22 +7,16 @@
 <meta name="description" content="JAGA INDONESIA — Perusahaan jasa pengamanan & penyelamatan berizin resmi Mabes Polri sejak 2010. Konsultan Keamanan, Crowd Management, Tenaga Lapangan, Unit K9, & Fasilitas Tenaga Medis. Jakarta · Semarang · Surabaya · Bali." />
 <meta name="theme-color" content="#0B0B0D" />
 <meta name="author" content="JAGA INDONESIA" />
-
-<!-- Favicon -->
 <link rel="icon" type="image/png" href="https://i.ibb.co.com/5XD3v0Gy/logo-jaga-indonesia-no-bg.png" />
-
-<!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="JAGA INDONESIA — The Best Security in Indonesia" />
 <meta property="og:description" content="Keselamatan dan Keamanan Anda Adalah Prioritas Kami." />
 <meta property="og:image" content="https://i.ibb.co.com/5XD3v0Gy/logo-jaga-indonesia-no-bg.png" />
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
-<!-- Tailwind CSS via CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -43,14 +37,8 @@
           display: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         },
         keyframes: {
-          marquee: {
-            '0%':   { transform: 'translateX(0)' },
-            '100%': { transform: 'translateX(-50%)' },
-          },
-          floaty: {
-            '0%,100%': { transform: 'translateY(0)' },
-            '50%':     { transform: 'translateY(-12px)' },
-          }
+          marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+          floaty:  { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } }
         },
         animation: {
           marquee: 'marquee 45s linear infinite',
@@ -61,575 +49,228 @@
   }
 </script>
 
-<!-- ============================================================
-     CUSTOM CSS
-     ============================================================ -->
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
 <style>
-  :root{
-    --red:      #E11D2E;
-    --red-dark: #B3121F;
-    --black:    #0B0B0D;
-  }
-
+  :root{ --red:#E11D2E; --red-dark:#B3121F; --black:#0B0B0D; }
   html { -webkit-tap-highlight-color: transparent; }
-  body {
-    background: var(--black);
-    overflow-x: hidden;
-    font-feature-settings: "cv02","cv03","cv04","cv11";
-  }
-
-  /* ---------- Scrollbar ---------- */
+  body { background: var(--black); overflow-x: hidden; }
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: #0B0B0D; }
-  ::-webkit-scrollbar-thumb {
-    background: #2b2b34;
-    border-radius: 99px;
-    border: 2px solid #0B0B0D;
-  }
+  ::-webkit-scrollbar-thumb { background: #2b2b34; border-radius: 99px; border: 2px solid #0B0B0D; }
   ::-webkit-scrollbar-thumb:hover { background: var(--red); }
-
   ::selection { background: var(--red); color: #fff; }
-
-  /* ---------- Anchor offset (fixed navbar) ---------- */
   section[id] { scroll-margin-top: 5.5rem; }
 
-  /* ---------- Header ---------- */
-  #header {
-    background: transparent;
-    transition: background .4s ease, box-shadow .4s ease,
-                backdrop-filter .4s ease, border-color .4s ease;
-    border-bottom: 1px solid transparent;
-  }
-  #header.header-scrolled {
-    background: rgba(11,11,13,.88);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    backdrop-filter: blur(16px) saturate(160%);
-    border-bottom-color: rgba(255,255,255,.07);
-    box-shadow: 0 20px 45px -25px rgba(0,0,0,1);
-  }
+  #header { background: transparent; transition: background .4s ease, box-shadow .4s ease, backdrop-filter .4s ease, border-color .4s ease; border-bottom: 1px solid transparent; }
+  #header.header-scrolled { background: rgba(11,11,13,.88); -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%); border-bottom-color: rgba(255,255,255,.07); box-shadow: 0 20px 45px -25px rgba(0,0,0,1); }
 
-  /* ---------- Nav links ---------- */
-  .nav-link {
-    position: relative;
-    font-size: .85rem;
-    font-weight: 500;
-    letter-spacing: .03em;
-    color: rgba(255,255,255,.70);
-    transition: color .25s ease;
-    padding-bottom: 6px;
-  }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0; bottom: 0;
-    height: 2px; width: 0;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--red), var(--red-dark));
-    transition: width .35s cubic-bezier(.22,1,.36,1);
-  }
+  .nav-link { position: relative; font-size: .85rem; font-weight: 500; letter-spacing: .03em; color: rgba(255,255,255,.70); transition: color .25s ease; padding-bottom: 6px; }
+  .nav-link::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 0; border-radius: 2px; background: linear-gradient(90deg, var(--red), var(--red-dark)); transition: width .35s cubic-bezier(.22,1,.36,1); }
   .nav-link:hover { color: #fff; }
-  .nav-link:hover::after,
-  .nav-link.active::after { width: 100%; }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
   .nav-link.active { color: #fff; }
 
-  /* ---------- Buttons ---------- */
-  .btn-primary {
-    display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
-    padding: .95rem 2rem;
-    border-radius: 9999px;
-    background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
-    color: #fff;
-    font-weight: 700; font-size: .76rem;
-    letter-spacing: .14em; text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,.10);
-    box-shadow: 0 12px 30px -14px rgba(225,29,46,1);
-    transition: transform .3s cubic-bezier(.22,1,.36,1),
-                box-shadow .3s ease, filter .3s ease;
-    cursor: pointer;
-  }
-  .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 42px -14px rgba(225,29,46,1);
-    filter: brightness(1.09);
-  }
-  .btn-primary:active { transform: translateY(-1px); }
+  .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; padding: .95rem 2rem; border-radius: 9999px; background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%); color: #fff; font-weight: 700; font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.10); box-shadow: 0 12px 30px -14px rgba(225,29,46,1); transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, filter .3s ease; cursor: pointer; }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 42px -14px rgba(225,29,46,1); filter: brightness(1.09); }
+  .btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; padding: .95rem 2rem; border-radius: 9999px; background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.22); color: #fff; font-weight: 700; font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: all .3s cubic-bezier(.22,1,.36,1); cursor: pointer; }
+  .btn-outline:hover { border-color: var(--red); background: rgba(225,29,46,.14); transform: translateY(-3px); }
 
-  .btn-outline {
-    display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
-    padding: .95rem 2rem;
-    border-radius: 9999px;
-    background: rgba(255,255,255,.035);
-    border: 1px solid rgba(255,255,255,.22);
-    color: #fff;
-    font-weight: 700; font-size: .76rem;
-    letter-spacing: .14em; text-transform: uppercase;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    transition: all .3s cubic-bezier(.22,1,.36,1);
-    cursor: pointer;
-  }
-  .btn-outline:hover {
-    border-color: var(--red);
-    background: rgba(225,29,46,.14);
-    transform: translateY(-3px);
-  }
-
-  /* ---------- Cards ---------- */
-  .card {
-    position: relative;
-    background: linear-gradient(160deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.012) 100%);
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 1.25rem;
-    overflow: hidden;
-    transition: transform .45s cubic-bezier(.22,1,.36,1),
-                border-color .35s ease, box-shadow .45s ease;
-  }
-  .card::before {
-    content:'';
-    position: absolute; inset: 0;
-    background: radial-gradient(520px circle at 50% 0%, rgba(225,29,46,.18), transparent 68%);
-    opacity: 0;
-    transition: opacity .45s ease;
-    pointer-events: none;
-  }
-  .card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(225,29,46,.55);
-    box-shadow: 0 30px 65px -32px rgba(225,29,46,.9);
-  }
+  .card { position: relative; background: linear-gradient(160deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.012) 100%); border: 1px solid rgba(255,255,255,.08); border-radius: 1.25rem; overflow: hidden; transition: transform .45s cubic-bezier(.22,1,.36,1), border-color .35s ease, box-shadow .45s ease; }
+  .card::before { content:''; position: absolute; inset: 0; background: radial-gradient(520px circle at 50% 0%, rgba(225,29,46,.18), transparent 68%); opacity: 0; transition: opacity .45s ease; pointer-events: none; }
+  .card:hover { transform: translateY(-8px); border-color: rgba(225,29,46,.55); box-shadow: 0 30px 65px -32px rgba(225,29,46,.9); }
   .card:hover::before { opacity: 1; }
 
-  .icon-box {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 3.3rem; height: 3.3rem;
-    border-radius: .95rem;
-    background: linear-gradient(135deg, rgba(225,29,46,.24), rgba(179,18,31,.06));
-    border: 1px solid rgba(225,29,46,.40);
-    color: var(--red);
-    transition: all .4s cubic-bezier(.22,1,.36,1);
-    flex-shrink: 0;
-  }
-  .card:hover .icon-box {
-    background: linear-gradient(135deg, var(--red), var(--red-dark));
-    color: #fff;
-    box-shadow: 0 14px 30px -14px rgba(225,29,46,1);
-    transform: scale(1.08) rotate(-4deg);
-  }
+  .icon-box { display: inline-flex; align-items: center; justify-content: center; width: 3.3rem; height: 3.3rem; border-radius: .95rem; background: linear-gradient(135deg, rgba(225,29,46,.24), rgba(179,18,31,.06)); border: 1px solid rgba(225,29,46,.40); color: var(--red); transition: all .4s cubic-bezier(.22,1,.36,1); flex-shrink: 0; }
+  .card:hover .icon-box { background: linear-gradient(135deg, var(--red), var(--red-dark)); color: #fff; box-shadow: 0 14px 30px -14px rgba(225,29,46,1); transform: scale(1.08) rotate(-4deg); }
 
-  /* ---------- Reveal on scroll ---------- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(34px);
-    transition: opacity .9s cubic-bezier(.22,1,.36,1),
-                transform .9s cubic-bezier(.22,1,.36,1);
-    will-change: opacity, transform;
-  }
+  .reveal { opacity: 0; transform: translateY(34px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); will-change: opacity, transform; }
   .reveal.is-visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; } }
 
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-    * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
-  }
+  .hero-bg { background-image: linear-gradient(90deg, rgba(11,11,13,.97) 0%, rgba(11,11,13,.88) 40%, rgba(11,11,13,.55) 100%), linear-gradient(180deg, rgba(11,11,13,.95) 0%, rgba(11,11,13,.40) 42%, rgba(11,11,13,1) 100%), url('https://i.ibb.co.com/RT0pX9jB/jaga-personil-event-pdf.png'); background-size: cover; background-position: center 35%; }
 
-  /* ---------- Hero ---------- */
-  .hero-bg {
-    background-image:
-      linear-gradient(90deg, rgba(11,11,13,.97) 0%, rgba(11,11,13,.88) 40%, rgba(11,11,13,.52) 100%),
-      linear-gradient(180deg, rgba(11,11,13,.95) 0%, rgba(11,11,13,.35) 42%, rgba(11,11,13,1) 100%),
-      url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1920&q=80');
-    background-size: cover;
-    background-position: center 35%;
-  }
+  .grid-pattern { background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 58px 58px; }
+  .red-glow { position: absolute; border-radius: 9999px; filter: blur(120px); pointer-events: none; z-index: 0; }
 
-  /* ---------- Decorative ---------- */
-  .grid-pattern {
-    background-image:
-      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size: 58px 58px;
-  }
-  .red-glow {
-    position: absolute;
-    border-radius: 9999px;
-    filter: blur(120px);
-    pointer-events: none;
-    z-index: 0;
-  }
+  .eyebrow { display: inline-flex; align-items: center; gap: .65rem; font-size: .68rem; font-weight: 700; letter-spacing: .30em; text-transform: uppercase; color: var(--red); }
+  .eyebrow::before { content:''; width: 30px; height: 2px; background: linear-gradient(90deg, var(--red), transparent); }
+  .eyebrow.center::after { content:''; width: 30px; height: 2px; background: linear-gradient(270deg, var(--red), transparent); }
 
-  /* ---------- Section eyebrow ---------- */
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: .65rem;
-    font-size: .68rem; font-weight: 700;
-    letter-spacing: .30em; text-transform: uppercase;
-    color: var(--red);
-  }
-  .eyebrow::before {
-    content:'';
-    width: 30px; height: 2px;
-    background: linear-gradient(90deg, var(--red), transparent);
-  }
-  .eyebrow.center::after {
-    content:'';
-    width: 30px; height: 2px;
-    background: linear-gradient(270deg, var(--red), transparent);
-  }
+  .text-gradient-red { background: linear-gradient(115deg, #FF5666 0%, var(--red) 48%, var(--red-dark) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-  .text-gradient-red {
-    background: linear-gradient(115deg, #FF5666 0%, var(--red) 48%, var(--red-dark) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+  .client-tile { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 92px; padding: 1.35rem .9rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,.07); background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.012)); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.62); transition: all .35s cubic-bezier(.22,1,.36,1); line-height: 1.3; }
+  .client-tile:hover { color: #fff; border-color: rgba(225,29,46,.55); background: linear-gradient(160deg, rgba(225,29,46,.16), rgba(225,29,46,.03)); transform: translateY(-5px) scale(1.02); box-shadow: 0 18px 40px -22px rgba(225,29,46,.9); }
 
-  /* ---------- Divider line ---------- */
-  .rule-red {
-    height: 3px; width: 72px;
-    border-radius: 99px;
-    background: linear-gradient(90deg, var(--red), rgba(225,29,46,0));
-  }
-
-  /* ---------- Client tiles ---------- */
-  .client-tile {
-    display: flex; align-items: center; justify-content: center; text-align: center;
-    min-height: 92px;
-    padding: 1.35rem .9rem;
-    border-radius: 1rem;
-    border: 1px solid rgba(255,255,255,.07);
-    background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.012));
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: .78rem;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.62);
-    transition: all .35s cubic-bezier(.22,1,.36,1);
-    line-height: 1.3;
-  }
-  .client-tile:hover {
-    color: #fff;
-    border-color: rgba(225,29,46,.55);
-    background: linear-gradient(160deg, rgba(225,29,46,.16), rgba(225,29,46,.03));
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 18px 40px -22px rgba(225,29,46,.9);
-  }
-
-  /* ---------- Filter tabs ---------- */
-  .tab-btn {
-    padding: .6rem 1.35rem;
-    border-radius: 9999px;
-    font-size: .72rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.6);
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.03);
-    transition: all .3s ease;
-    cursor: pointer;
-    white-space: nowrap;
-  }
+  .tab-btn { padding: .6rem 1.35rem; border-radius: 9999px; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); transition: all .3s ease; cursor: pointer; white-space: nowrap; }
   .tab-btn:hover { color:#fff; border-color: rgba(225,29,46,.5); }
-  .tab-btn.active {
-    color:#fff;
-    background: linear-gradient(135deg, var(--red), var(--red-dark));
-    border-color: transparent;
-    box-shadow: 0 12px 26px -14px rgba(225,29,46,1);
-  }
+  .tab-btn.active { color:#fff; background: linear-gradient(135deg, var(--red), var(--red-dark)); border-color: transparent; box-shadow: 0 12px 26px -14px rgba(225,29,46,1); }
 
-  /* ---------- Event card ---------- */
-  .event-item {
-    transition: all .35s ease;
-  }
-  .event-item.hidden-item {
-    display: none;
-  }
+  .event-item { transition: all .35s ease; }
+  .event-item.hidden-item { display: none; }
 
-  /* ---------- Marquee ---------- */
-  .marquee-mask {
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  }
+  .marquee-mask { -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
 
-  /* ---------- Mobile menu ---------- */
-  #mobileMenu {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height .5s cubic-bezier(.22,1,.36,1), opacity .35s ease;
-  }
-  #mobileMenu.open {
-    max-height: 620px;
-    opacity: 1;
-  }
+  #mobileMenu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s cubic-bezier(.22,1,.36,1), opacity .35s ease; }
+  #mobileMenu.open { max-height: 720px; opacity: 1; }
 
-  /* ---------- Back to top ---------- */
-  #toTop {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(14px);
-    transition: all .4s cubic-bezier(.22,1,.36,1);
-  }
-  #toTop.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
+  #toTop { opacity: 0; visibility: hidden; transform: translateY(14px); transition: all .4s cubic-bezier(.22,1,.36,1); }
+  #toTop.show { opacity: 1; visibility: visible; transform: translateY(0); }
 
-  /* ---------- Hamburger ---------- */
-  .bar {
-    display: block;
-    width: 24px; height: 2px;
-    background: #fff;
-    border-radius: 2px;
-    transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .25s ease;
-  }
+  .bar { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .25s ease; }
   .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.active .bar:nth-child(2) { opacity: 0; }
   .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Leaflet Custom */
+  #map { background: #141419; }
+  .custom-popup .leaflet-popup-content-wrapper { background: #fff; border-radius: 14px; box-shadow: 0 18px 45px -15px rgba(0,0,0,.7); border: 1px solid rgba(0,0,0,.06); }
+  .custom-popup .leaflet-popup-content { margin: 14px 16px; }
+  .custom-popup .leaflet-popup-tip { background: #fff; }
+  .custom-popup .leaflet-popup-close-button { color: #999; font-size: 18px; padding: 8px 10px 0 0; }
+  .custom-tooltip { background: rgba(11,11,13,.92) !important; border: 1px solid rgba(225,29,46,.5) !important; color: #fff !important; font-family: Inter, sans-serif !important; font-size: 11px !important; font-weight: 600 !important; letter-spacing: .03em !important; border-radius: 8px !important; padding: 5px 10px !important; box-shadow: 0 6px 20px rgba(0,0,0,.5) !important; }
+  .custom-tooltip::before { border-top-color: rgba(225,29,46,.5) !important; }
+  .leaflet-control-zoom { border: none !important; box-shadow: 0 4px 16px rgba(0,0,0,.4) !important; }
+  .leaflet-control-zoom a { background: rgba(11,11,13,.9) !important; color: #fff !important; border: 1px solid rgba(255,255,255,.12) !important; width: 34px !important; height: 34px !important; line-height: 34px !important; font-size: 16px !important; transition: all .2s ease; }
+  .leaflet-control-zoom a:hover { background: #E11D2E !important; border-color: #E11D2E !important; }
+  .leaflet-control-zoom-in { border-radius: 8px 8px 0 0 !important; }
+  .leaflet-control-zoom-out { border-radius: 0 0 8px 8px !important; border-top: none !important; }
+  .leaflet-control-attribution { background: rgba(11,11,13,.75) !important; color: rgba(255,255,255,.45) !important; font-size: 9px !important; border-radius: 6px 0 0 0; }
+  .leaflet-control-attribution a { color: rgba(225,29,46,.9) !important; }
 </style>
 </head>
 
 <body class="bg-jaga-black text-white font-sans antialiased">
 
-<!-- ============================================================
-     NAVBAR
-     ============================================================ -->
+<!-- ============ NAVBAR ============ -->
 <header id="header" class="fixed top-0 inset-x-0 z-50">
   <nav class="max-w-7xl mx-auto px-5 sm:px-8">
     <div class="flex items-center justify-between h-20">
-
-      <!-- Logo -->
-      <a href="#beranda" class="flex items-center gap-3 group shrink-0" aria-label="JAGA INDONESIA — Beranda">
-        <img
-          src="https://i.ibb.co.com/5XD3v0Gy/logo-jaga-indonesia-no-bg.png"
-          alt="Logo JAGA INDONESIA"
-          class="h-11 sm:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_4px_14px_rgba(225,29,46,.45)]"
-          loading="eager"
-        />
+      <a href="#beranda" class="flex items-center gap-3 group shrink-0" aria-label="JAGA INDONESIA">
+        <img src="https://i.ibb.co.com/5XD3v0Gy/logo-jaga-indonesia-no-bg.png" alt="Logo JAGA INDONESIA" class="h-11 sm:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_4px_14px_rgba(225,29,46,.45)]" />
       </a>
-
-      <!-- Desktop menu -->
-      <ul class="hidden lg:flex items-center gap-8">
-        <li><a href="#beranda"    class="nav-link active">Beranda</a></li>
-        <li><a href="#tentang"    class="nav-link">Tentang Kami</a></li>
-        <li><a href="#layanan"    class="nav-link">Layanan</a></li>
+      <ul class="hidden lg:flex items-center gap-7">
+        <li><a href="#beranda" class="nav-link active">Beranda</a></li>
+        <li><a href="#tentang" class="nav-link">Tentang Kami</a></li>
+        <li><a href="#layanan" class="nav-link">Layanan</a></li>
         <li><a href="#portofolio" class="nav-link">Portofolio</a></li>
-        <li><a href="#klien"      class="nav-link">Klien</a></li>
-        <li><a href="#kontak"     class="nav-link">Kontak</a></li>
+        <li><a href="#klien" class="nav-link">Klien</a></li>
+        <li><a href="#peta" class="nav-link">Peta</a></li>
+        <li><a href="#kontak" class="nav-link">Kontak</a></li>
       </ul>
-
-      <!-- Desktop CTA -->
-      <a href="#kontak" class="hidden lg:inline-flex btn-primary !py-3 !px-6 !text-[.7rem]">
-        Hubungi Kami
-      </a>
-
-      <!-- Hamburger -->
-      <button
-        id="hamburger"
-        class="hamburger lg:hidden flex flex-col justify-center items-center gap-[5px] w-11 h-11 rounded-xl border border-white/12 bg-white/5 hover:border-jaga-red/60 transition-colors"
-        aria-label="Buka menu navigasi"
-        aria-expanded="false"
-        aria-controls="mobileMenu"
-      >
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+      <a href="#kontak" class="hidden lg:inline-flex btn-primary !py-3 !px-6 !text-[.7rem]">Hubungi Kami</a>
+      <button id="hamburger" class="hamburger lg:hidden flex flex-col justify-center items-center gap-[5px] w-11 h-11 rounded-xl border border-white/12 bg-white/5 hover:border-jaga-red/60 transition-colors" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
     </div>
   </nav>
-
-  <!-- Mobile menu -->
   <div id="mobileMenu" class="lg:hidden bg-jaga-black/97 backdrop-blur-xl border-t border-white/8">
     <ul class="px-6 py-6 space-y-1">
-      <li><a href="#beranda"    class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Beranda</a></li>
-      <li><a href="#tentang"    class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Tentang Kami</a></li>
-      <li><a href="#layanan"    class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Layanan</a></li>
+      <li><a href="#beranda" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Beranda</a></li>
+      <li><a href="#tentang" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Tentang Kami</a></li>
+      <li><a href="#layanan" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Layanan</a></li>
       <li><a href="#portofolio" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Portofolio</a></li>
-      <li><a href="#klien"      class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Klien</a></li>
-      <li><a href="#kontak"     class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red transition-colors">Kontak</a></li>
-      <li class="pt-4">
-        <a href="#kontak" class="mobile-link btn-primary w-full">Hubungi Kami</a>
-      </li>
+      <li><a href="#klien" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Klien</a></li>
+      <li><a href="#peta" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Peta</a></li>
+      <li><a href="#kontak" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red transition-colors">Kontak</a></li>
+      <li class="pt-4"><a href="#kontak" class="mobile-link btn-primary w-full">Hubungi Kami</a></li>
     </ul>
   </div>
 </header>
 
-
-<!-- ============================================================
-     1. HERO / BERANDA
-     ============================================================ -->
+<!-- ============ HERO ============ -->
 <section id="beranda" class="relative min-h-screen flex items-center hero-bg overflow-hidden">
-  <!-- Decorative glows -->
   <div class="red-glow w-[520px] h-[520px] bg-jaga-red/25 -top-32 -right-24"></div>
   <div class="red-glow w-[420px] h-[420px] bg-jaga-dark/20 bottom-0 -left-24"></div>
   <div class="absolute inset-0 grid-pattern opacity-40 pointer-events-none"></div>
-
   <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full pt-28 pb-24">
     <div class="max-w-3xl">
-
-      <!-- Badge -->
       <div class="reveal inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-jaga-red/40 bg-jaga-red/10 backdrop-blur-sm mb-7">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-jaga-red opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-jaga-red"></span>
         </span>
-        <span class="text-[.68rem] font-bold tracking-[.22em] uppercase text-white/85">
-          Berizin Resmi Mabes Polri Sejak 2010
-        </span>
+        <span class="text-[.68rem] font-bold tracking-[.22em] uppercase text-white/85">Berizin Resmi Mabes Polri Sejak 2010</span>
       </div>
-
-      <!-- Headline -->
-      <h1 class="reveal font-display font-extrabold leading-[1.06] tracking-tight
-                 text-[2.6rem] sm:text-[3.4rem] lg:text-[4.4rem] mb-6">
+      <h1 class="reveal font-display font-extrabold leading-[1.06] tracking-tight text-[2.6rem] sm:text-[3.4rem] lg:text-[4.4rem] mb-6">
         <span class="block text-white">The Best Security</span>
         <span class="block text-gradient-red">in Indonesia</span>
       </h1>
-
-      <!-- Sub-headline -->
       <p class="reveal text-lg sm:text-xl text-white/70 leading-relaxed max-w-2xl mb-4 font-light">
         <span class="text-white font-semibold">Keselamatan dan Keamanan Anda Adalah Prioritas Kami.</span>
       </p>
       <p class="reveal text-base sm:text-lg text-white/55 leading-relaxed max-w-2xl mb-10">
-        Kami menawarkan standar tinggi dalam keamanan dan pelayanan prima —
-        didukung personel terlatih, sertifikasi internasional, dan jangkauan operasional
-        di Jakarta, Semarang, Surabaya, serta Bali.
+        Kami menawarkan standar tinggi dalam keamanan dan pelayanan prima — didukung personel terlatih, sertifikasi internasional, dan jangkauan operasional di Jakarta, Semarang, Surabaya, serta Bali.
       </p>
-
-      <!-- CTA -->
       <div class="reveal flex flex-col sm:flex-row gap-4 mb-14">
         <a href="#kontak" class="btn-primary">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
-          </svg>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>
           Hubungi Kami
         </a>
         <a href="#layanan" class="btn-outline">
           Lihat Layanan
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
       </div>
-
-      <!-- Mini stats -->
       <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl">
-        <div class="border-l-2 border-jaga-red/60 pl-4">
-          <div class="font-display font-extrabold text-2xl sm:text-3xl text-white" data-count="2010" data-raw="true">2010</div>
-          <div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1">Berdiri</div>
-        </div>
-        <div class="border-l-2 border-jaga-red/60 pl-4">
-          <div class="font-display font-extrabold text-2xl sm:text-3xl text-white"><span data-count="4">0</span></div>
-          <div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1">Kota Operasional</div>
-        </div>
-        <div class="border-l-2 border-jaga-red/60 pl-4">
-          <div class="font-display font-extrabold text-2xl sm:text-3xl text-white"><span data-count="300">0</span>+</div>
-          <div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1">Event Diamankan</div>
-        </div>
-        <div class="border-l-2 border-jaga-red/60 pl-4">
-          <div class="font-display font-extrabold text-2xl sm:text-3xl text-white"><span data-count="6">0</span></div>
-          <div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1">Lini Layanan</div>
-        </div>
+        <div class="border-l-2 border-jaga-red/60 pl-4"><div class="font-display font-extrabold text-2xl sm:text-3xl text-white">2010</div><div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1">Berdiri</div></div>
+        <div class="border-l-2 border-jaga-red/60 pl-4"><div class="font-display font-extrabold text-2xl sm:text-3xl text-white"><span data-count="4">0</span></div><div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1">Kota Operasional</div></div>
+        <div class="border-l-2 border-jaga-red/60 pl-4"><div class="font-display font-extrabold text-2xl sm:text-3xl text-white"><span data-count="300">0</span>+</div><div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1">Event Diamankan</div></div>
+        <div class="border-l-2 border-jaga-red/60 pl-4"><div class="font-display font-extrabold text-2xl sm:text-3xl text-white"><span data-count="6">0</span></div><div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1">Lini Layanan</div></div>
       </div>
     </div>
   </div>
-
-  <!-- Scroll indicator -->
-  <a href="#tentang" class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-2 group">
-    <span class="text-[.6rem] tracking-[.3em] uppercase text-white/35 group-hover:text-jaga-red transition-colors">Scroll</span>
-    <span class="w-[1px] h-12 bg-gradient-to-b from-jaga-red to-transparent"></span>
-  </a>
 </section>
 
-
-<!-- ============================================================
-     MARQUEE STRIP
-     ============================================================ -->
+<!-- ============ MARQUEE ============ -->
 <div class="relative border-y border-white/8 bg-jaga-coal/60 overflow-hidden py-4 marquee-mask">
   <div class="flex w-max animate-marquee">
-    <!-- duplicate set for seamless loop -->
     <div class="flex items-center gap-10 pr-10 whitespace-nowrap">
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Crowd Management</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Safety</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Security</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Unit K9</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Tenaga Medis</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Konsultan Keamanan</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 9001:2015</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 45001:2018</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 14001:2015</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">BNSP</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Crowd Management</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Safety</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Security</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Unit K9</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Tenaga Medis</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Konsultan Keamanan</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 9001:2015</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 45001:2018</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 14001:2015</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">BNSP</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
     </div>
     <div class="flex items-center gap-10 pr-10 whitespace-nowrap" aria-hidden="true">
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Crowd Management</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Safety</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Security</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Unit K9</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Tenaga Medis</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Konsultan Keamanan</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 9001:2015</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 45001:2018</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 14001:2015</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
-      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">BNSP</span>
-      <span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Crowd Management</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Safety</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Security</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Unit K9</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Tenaga Medis</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">Konsultan Keamanan</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 9001:2015</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 45001:2018</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">ISO 14001:2015</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
+      <span class="text-[.7rem] font-bold tracking-[.3em] uppercase text-white/40">BNSP</span><span class="w-1.5 h-1.5 rounded-full bg-jaga-red"></span>
     </div>
   </div>
 </div>
 
-
-<!-- ============================================================
-     2. TENTANG KAMI
-     ============================================================ -->
+<!-- ============ TENTANG KAMI ============ -->
 <section id="tentang" class="relative py-24 sm:py-32 bg-jaga-black overflow-hidden">
   <div class="red-glow w-[480px] h-[480px] bg-jaga-red/10 top-20 -left-40"></div>
-
   <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
     <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-
-      <!-- Left: visual -->
       <div class="reveal order-2 lg:order-1 relative">
         <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-          <img
-            src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=80"
-            alt="Personel keamanan JAGA INDONESIA"
-            class="w-full h-[420px] sm:h-[520px] object-cover"
-            loading="lazy"
-          />
+          <img src="https://i.ibb.co.com/PsSDywfH/jaga-personil-event-2.png" alt="Personel keamanan JAGA INDONESIA" class="w-full h-[420px] sm:h-[520px] object-cover" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-jaga-black via-jaga-black/25 to-transparent"></div>
-
-          <!-- Floating badge -->
           <div class="absolute bottom-6 left-6 right-6 flex items-center gap-4 p-4 rounded-2xl bg-jaga-black/80 backdrop-blur-md border border-white/10">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-jaga-red to-jaga-dark flex items-center justify-center shrink-0">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             </div>
-            <div>
-              <p class="font-display font-bold text-sm text-white">Izin Operasional Resmi</p>
-              <p class="text-xs text-white/55">Markas Besar Kepolisian Republik Indonesia</p>
-            </div>
+            <div><p class="font-display font-bold text-sm text-white">Izin Operasional Resmi</p><p class="text-xs text-white/55">Markas Besar Kepolisian Republik Indonesia</p></div>
           </div>
         </div>
-
-        <!-- Floating year card -->
         <div class="hidden sm:block absolute -top-6 -right-6 animate-floaty">
           <div class="px-6 py-5 rounded-2xl bg-gradient-to-br from-jaga-red to-jaga-dark shadow-2xl shadow-jaga-red/30">
             <div class="font-display font-extrabold text-3xl leading-none text-white">2010</div>
@@ -638,599 +279,274 @@
         </div>
       </div>
 
-      <!-- Right: content -->
       <div class="order-1 lg:order-2">
         <span class="reveal eyebrow">Tentang Kami</span>
-
         <h2 class="reveal font-display font-extrabold text-3xl sm:text-4xl lg:text-[2.85rem] leading-tight mt-5 mb-6">
           Sekuriti Profesional dengan <span class="text-gradient-red">Standar Internasional</span>
         </h2>
-
         <p class="reveal text-white/65 leading-relaxed mb-5">
-          <strong class="text-white font-semibold">JAGA INDONESIA</strong> merupakan perusahaan jasa
-          pengamanan dan penyelamatan yang telah mendapatkan <strong class="text-white font-semibold">izin
-          operasional resmi dari Markas Besar Kepolisian Republik Indonesia sejak tahun 2010</strong>,
-          serta telah mendapatkan berbagai macam sertifikasi.
+          <strong class="text-white font-semibold">JAGA INDONESIA</strong> merupakan perusahaan jasa pengamanan dan penyelamatan yang telah mendapatkan <strong class="text-white font-semibold">izin operasional resmi dari Markas Besar Kepolisian Republik Indonesia sejak tahun 2010</strong>, serta telah mendapatkan berbagai macam sertifikasi.
         </p>
-
         <p class="reveal text-white/55 leading-relaxed mb-8">
-          Kami berkomitmen memberikan rasa aman melalui personel terlatih, prosedur operasional
-          yang ketat, dan teknologi pendukung terkini — untuk setiap event, aset, maupun fasilitas
-          yang Anda percayakan kepada kami.
+          Kami berkomitmen memberikan rasa aman melalui personel terlatih, prosedur operasional yang ketat, dan teknologi pendukung terkini — untuk setiap event, aset, maupun fasilitas yang Anda percayakan kepada kami.
         </p>
 
-        <!-- Cakupan operasional -->
         <div class="reveal mb-8">
-          <p class="text-[.68rem] font-bold tracking-[.24em] uppercase text-white/40 mb-4">
-            Jangkauan Operasional
-          </p>
+          <p class="text-[.68rem] font-bold tracking-[.24em] uppercase text-white/40 mb-4">Jangkauan Operasional</p>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div class="flex items-center gap-2.5 px-3.5 py-3 rounded-xl bg-white/[.04] border border-white/8 hover:border-jaga-red/45 transition-colors">
-              <svg class="w-4 h-4 text-jaga-red shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-              <span class="text-sm font-medium text-white/85">Jakarta</span>
-            </div>
-            <div class="flex items-center gap-2.5 px-3.5 py-3 rounded-xl bg-white/[.04] border border-white/8 hover:border-jaga-red/45 transition-colors">
-              <svg class="w-4 h-4 text-jaga-red shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-              <span class="text-sm font-medium text-white/85">Semarang</span>
-            </div>
-            <div class="flex items-center gap-2.5 px-3.5 py-3 rounded-xl bg-white/[.04] border border-white/8 hover:border-jaga-red/45 transition-colors">
-              <svg class="w-4 h-4 text-jaga-red shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-              <span class="text-sm font-medium text-white/85">Surabaya</span>
-            </div>
-            <div class="flex items-center gap-2.5 px-3.5 py-3 rounded-xl bg-white/[.04] border border-white/8 hover:border-jaga-red/45 transition-colors">
-              <svg class="w-4 h-4 text-jaga-red shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-              <span class="text-sm font-medium text-white/85">Bali</span>
-            </div>
+            <div class="flex items-center gap-2.5 px-3.5 py-3 rounded-xl bg-white/[.04] border border-white/8 hover:border-jaga-red/45 transition-colors"><svg class="w-4 h-4 text-jaga-red shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span class="text-sm font-medium text-white/85">Jakarta</span></div>
+            <div class="flex items-center gap-2.5 px-3.5 py-3 rounded-xl bg-white/[.04] border border-white/8 hover:border-jaga-red/45 transition-colors"><svg class="w-4 h-4 text-jaga-red shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span class="text-sm font-medium text-white/85">Semarang</span></div>
+            <div class="flex items-center gap-2.5 px-3.5 py-3 rounded-xl bg-white/[.04] border border-white/8 hover:border-jaga-red/45 transition-colors"><svg class="w-4 h-4 text-jaga-red shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span class="text-sm font-medium text-white/85">Surabaya</span></div>
+            <div class="flex items-center gap-2.5 px-3.5 py-3 rounded-xl bg-white/[.04] border border-white/8 hover:border-jaga-red/45 transition-colors"><svg class="w-4 h-4 text-jaga-red shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span class="text-sm font-medium text-white/85">Bali</span></div>
           </div>
         </div>
 
-        <!-- Sertifikasi -->
         <div class="reveal mb-8">
-          <p class="text-[.68rem] font-bold tracking-[.24em] uppercase text-white/40 mb-4">
-            Sertifikasi
-          </p>
-          <div class="flex flex-wrap gap-2.5">
-            <span class="px-4 py-2 rounded-lg text-xs font-bold tracking-wide bg-white/[.05] border border-white/10 text-white/80 hover:border-jaga-red/50 hover:text-white transition-colors">ISO 9001:2015</span>
-            <span class="px-4 py-2 rounded-lg text-xs font-bold tracking-wide bg-white/[.05] border border-white/10 text-white/80 hover:border-jaga-red/50 hover:text-white transition-colors">ISO 45001:2018</span>
-            <span class="px-4 py-2 rounded-lg text-xs font-bold tracking-wide bg-white/[.05] border border-white/10 text-white/80 hover:border-jaga-red/50 hover:text-white transition-colors">ISO 14001:2015</span>
-            <span class="px-4 py-2 rounded-lg text-xs font-bold tracking-wide bg-jaga-red/15 border border-jaga-red/45 text-white transition-colors">BNSP</span>
+          <p class="text-[.68rem] font-bold tracking-[.24em] uppercase text-white/40 mb-4">Sertifikasi</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide bg-white/[.05] border border-white/10 text-white/80 hover:border-jaga-red/50 hover:text-white transition-colors">ISO 9001:2015</span>
+            <span class="px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide bg-white/[.05] border border-white/10 text-white/80 hover:border-jaga-red/50 hover:text-white transition-colors">ISO 45001:2018</span>
+            <span class="px-4 py-2.5 rounded-xl text-xs font-bold tracking-wide bg-white/[.05] border border-white/10 text-white/80 hover:border-jaga-red/50 hover:text-white transition-colors">ISO 14001:2015</span>
+            <span class="px-4 py-2.5 rounded-xl bg-white/[.05] border border-white/10 flex items-center gap-2.5 hover:border-jaga-red/50 transition-colors">
+              <img src="https://bnsp.go.id/assets/images/logo-bnsp.png" alt="BNSP" class="h-6 w-auto object-contain" loading="lazy" />
+              <span class="text-xs font-bold tracking-wide text-white/80">BNSP</span>
+            </span>
           </div>
         </div>
 
-        <!-- Asosiasi -->
         <div class="reveal p-5 rounded-2xl bg-gradient-to-br from-white/[.05] to-transparent border border-white/10">
-          <p class="text-[.68rem] font-bold tracking-[.24em] uppercase text-white/40 mb-3">
-            Terdaftar Sebagai Anggota
-          </p>
-          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+          <p class="text-[.68rem] font-bold tracking-[.24em] uppercase text-white/40 mb-4">Terdaftar Sebagai Anggota</p>
+          <div class="grid sm:grid-cols-2 gap-4">
             <div class="flex items-center gap-3">
-              <span class="w-2 h-2 rounded-full bg-jaga-red shrink-0"></span>
-              <span class="text-sm text-white/80">Asosiasi Profesi Satpam Indonesia <span class="text-white/40">(APSI)</span></span>
+              <img src="https://www.apsiindonesia.or.id/img/logo.png" alt="APSI" class="h-9 w-auto object-contain" loading="lazy" />
+              <div><p class="text-sm font-semibold text-white/85">APSI</p><p class="text-[.62rem] text-white/40 leading-tight">Asosiasi Profesi Satpam Indonesia</p></div>
             </div>
             <div class="flex items-center gap-3">
-              <span class="w-2 h-2 rounded-full bg-jaga-red shrink-0"></span>
-              <span class="text-sm text-white/80">Asosiasi Badan Usaha Jasa Pengamanan Indonesia <span class="text-white/40">(ABUJAPI)</span></span>
+              <img src="https://bpdabujapijabar.or.id/_next/static/media/logo.3_y7w5f0opjx_.ico" alt="ABUJAPI" class="h-9 w-auto object-contain" loading="lazy" />
+              <div><p class="text-sm font-semibold text-white/85">ABUJAPI</p><p class="text-[.62rem] text-white/40 leading-tight">Asosiasi Badan Usaha Jasa Pengamanan Indonesia</p></div>
             </div>
           </div>
+          <div class="mt-5 pt-5 border-t border-white/8 flex items-center gap-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Lambang_Polri.png" alt="Polri" class="h-12 w-auto object-contain drop-shadow-[0_4px_14px_rgba(225,29,46,.4)]" loading="lazy" />
+            <div><p class="text-sm font-semibold text-white/85">Izin Operasional Resmi</p><p class="text-[.65rem] text-white/45">Markas Besar Kepolisian Republik Indonesia</p></div>
+          </div>
         </div>
-
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- ============================================================
-     3. LAYANAN
-     ============================================================ -->
+<!-- ============ LAYANAN ============ -->
 <section id="layanan" class="relative py-24 sm:py-32 bg-jaga-coal/40 border-y border-white/8 overflow-hidden">
   <div class="red-glow w-[500px] h-[500px] bg-jaga-red/10 -top-20 right-0"></div>
-
   <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
-
-    <!-- Heading -->
     <div class="max-w-3xl mb-16">
       <span class="reveal eyebrow">Layanan Kami</span>
       <h2 class="reveal font-display font-extrabold text-3xl sm:text-4xl lg:text-[2.85rem] leading-tight mt-5 mb-5">
         Solusi Keamanan <span class="text-gradient-red">Menyeluruh</span> untuk Setiap Kebutuhan
       </h2>
       <p class="reveal text-white/60 leading-relaxed">
-        Dari konsultasi risiko hingga penanganan medis di lokasi — kami menghadirkan
-        ekosistem keamanan terpadu yang dirancang sesuai skala dan karakter kebutuhan Anda.
+        Dari konsultasi risiko hingga penanganan medis di lokasi — kami menghadirkan ekosistem keamanan terpadu yang dirancang sesuai skala dan karakter kebutuhan Anda.
       </p>
     </div>
 
-    <!-- Grid layanan -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- 1. Konsultan Keamanan -->
+      <!-- 1 -->
       <article class="reveal card p-7">
-        <div class="icon-box mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-          </svg>
-        </div>
+        <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Konsultan Keamanan</h3>
-        <p class="text-sm text-white/55 leading-relaxed mb-5">
-          Layanan untuk membantu organisasi atau individu mengidentifikasi, merancang,
-          dan mengevaluasi sistem keamanan secara menyeluruh.
-        </p>
+        <p class="text-sm text-white/55 leading-relaxed mb-5">Layanan untuk membantu organisasi atau individu mengidentifikasi, merancang, dan mengevaluasi sistem keamanan secara menyeluruh.</p>
         <ul class="space-y-2.5">
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="text-jaga-red mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Penilaian Risiko (Risk Assessment)</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="text-jaga-red mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Perencanaan &amp; Implementasi Keamanan</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="text-jaga-red mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Pelatihan &amp; Kesadaran Keamanan</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="text-jaga-red mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Audit Keamanan</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="text-jaga-red mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Penanggulangan Insiden</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Penilaian Risiko (Risk Assessment)</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Perencanaan &amp; Implementasi Keamanan</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Pelatihan &amp; Kesadaran Keamanan</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Audit Keamanan</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Penanggulangan Insiden</li>
         </ul>
       </article>
-
-      <!-- 2. Crowd Management -->
+      <!-- 2 -->
       <article class="reveal card p-7">
-        <div class="icon-box mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-          </svg>
-        </div>
+        <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Crowd Management &amp; Security Event</h3>
-        <p class="text-sm text-white/55 leading-relaxed mb-5">
-          Pengelolaan massa dan pengamanan event berskala nasional hingga internasional
-          dengan perencanaan risiko yang matang.
-        </p>
+        <p class="text-sm text-white/55 leading-relaxed mb-5">Pengelolaan massa dan pengamanan event berskala nasional hingga internasional dengan perencanaan risiko yang matang.</p>
         <ul class="space-y-2.5">
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Keamanan Fisik (Physical Security)</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Pengelolaan Risiko</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Investigasi</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Pengawasan Operasional</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Tanggapan Cepat (Rapid Response)</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Keamanan Fisik (Physical Security)</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Pengelolaan Risiko</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Investigasi</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Pengawasan Operasional</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Tanggapan Cepat (Rapid Response)</li>
         </ul>
       </article>
-
-      <!-- 3. Jasa Tenaga Lapangan -->
+      <!-- 3 -->
       <article class="reveal card p-7">
-        <div class="icon-box mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
-        </div>
+        <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Jasa Tenaga Lapangan</h3>
-        <p class="text-sm text-white/55 leading-relaxed mb-5">
-          Penempatan personel keamanan profesional untuk pengamanan aset, gedung,
-          dan fasilitas secara berkelanjutan.
-        </p>
+        <p class="text-sm text-white/55 leading-relaxed mb-5">Penempatan personel keamanan profesional untuk pengamanan aset, gedung, dan fasilitas secara berkelanjutan.</p>
         <ul class="space-y-2.5">
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Keamanan Fisik</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Pengamanan Aset</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Investigasi</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Pengawasan Operasional</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Tanggap Cepat</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Keamanan Fisik</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Pengamanan Aset</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Investigasi</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Pengawasan Operasional</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Tanggap Cepat</li>
         </ul>
       </article>
-
-      <!-- 4. Unit K9 -->
+      <!-- 4 -->
       <article class="reveal card p-7">
-        <div class="icon-box mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-          </svg>
-        </div>
+        <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Unit K9 <span class="text-jaga-red">/ JBOM</span></h3>
-        <p class="text-sm text-white/55 leading-relaxed mb-5">
-          Dikenal sebagai anjing pelacak, K-9 merupakan detektor kriminalitas yang
-          mendeteksi ancaman, melakukan investigasi, serta mengatasi gangguan Kamtibmas.
-        </p>
+        <p class="text-sm text-white/55 leading-relaxed mb-5">Dikenal sebagai anjing pelacak, K-9 merupakan detektor kriminalitas yang mendeteksi ancaman, melakukan investigasi, serta mengatasi gangguan Kamtibmas.</p>
         <ul class="space-y-2.5">
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Deteksi Barang Terlarang (Narkotika, Bahan Peledak, Senjata Api)</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Pengendalian Massa</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Identifikasi &amp; Pelacakan</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Pengamanan VVIP/VIP &amp; Event</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Penjagaan Gedung &amp; Fasilitas Publik</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Deteksi Barang Terlarang</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Pengendalian Massa</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Identifikasi &amp; Pelacakan</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Pengamanan VVIP/VIP</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Penjagaan Gedung &amp; Fasilitas Publik</li>
         </ul>
       </article>
-
-      <!-- 5. Fasilitas Tenaga Medis -->
+      <!-- 5 -->
       <article class="reveal card p-7">
-        <div class="icon-box mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 8H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2z"/>
-          </svg>
-        </div>
+        <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/><path stroke-linecap="round" stroke-linejoin="round" d="M19 8H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Fasilitas Tenaga Medis</h3>
-        <p class="text-sm text-white/55 leading-relaxed mb-5">
-          Dukungan medis profesional yang siaga selama event berlangsung, lengkap
-          dengan protokol evakuasi yang terstruktur.
-        </p>
+        <p class="text-sm text-white/55 leading-relaxed mb-5">Dukungan medis profesional yang siaga selama event berlangsung, lengkap dengan protokol evakuasi yang terstruktur.</p>
         <ul class="space-y-2.5">
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Tenaga Medis Profesional (Perawat &amp; Dokter Umum)</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Unit Ambulans Lengkap</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Defibrillator, Tandu &amp; Oksigen Portabel</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Protokol Evakuasi ke Rumah Sakit</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Tenaga Medis Profesional</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Unit Ambulans Lengkap</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Defibrillator, Tandu &amp; Oksigen Portabel</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Protokol Evakuasi ke Rumah Sakit</li>
         </ul>
       </article>
-
-      <!-- 6. Fasilitas Keamanan -->
+      <!-- 6 -->
       <article class="reveal card p-7">
-        <div class="icon-box mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-        </div>
+        <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Fasilitas Keamanan</h3>
-        <p class="text-sm text-white/55 leading-relaxed mb-5">
-          Sistem pengamanan yang komprehensif, sah secara hukum, dan memenuhi standar
-          yang berlaku — dengan pemeliharaan berkala.
-        </p>
+        <p class="text-sm text-white/55 leading-relaxed mb-5">Sistem pengamanan yang komprehensif, sah secara hukum, dan memenuhi standar yang berlaku — dengan pemeliharaan berkala.</p>
         <ul class="space-y-2.5">
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Sistem Pengamanan Terpadu</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Peralatan Bersertifikat (Metal Detector, HT, dll)</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Pemeliharaan Fasilitas Berkala</li>
-          <li class="flex gap-2.5 text-sm text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0 mt-1.5"></span>Kesiapan Operasional 24/7</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Sistem Pengamanan Terpadu</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Peralatan Bersertifikat</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Pemeliharaan Fasilitas Berkala</li>
+          <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Kesiapan Operasional 24/7</li>
         </ul>
       </article>
-
     </div>
 
-    <!-- CTA bawah -->
+    <!-- Galeri Operasional -->
+    <div class="reveal mt-16">
+      <div class="mb-8">
+        <span class="eyebrow">Galeri</span>
+        <h3 class="font-display font-bold text-2xl sm:text-3xl text-white mt-4">Armada &amp; Personel JAGA INDONESIA</h3>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl overflow-hidden border border-white/10 group lg:col-span-2 lg:row-span-2">
+          <img src="https://i.ibb.co.com/N2q7tD4Q/ambulans-dan-mobil-jaga-event.png" alt="Ambulans & mobil operasional" class="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-white/10 group">
+          <img src="https://i.ibb.co.com/bjB3RxHS/mobil-jaga-event.png" alt="Mobil operasional" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-white/10 group">
+          <img src="https://i.ibb.co.com/fdK668gp/perlengkapan-jaga.png" alt="Perlengkapan personel" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-white/10 group">
+          <img src="https://i.ibb.co.com/rf2sQ4n8/jaga-personil-outlet-bulk.png" alt="Personel di outlet" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-white/10 group">
+          <img src="https://i.ibb.co.com/27jKwT2J/jaga-personil-outlet-bulk2.png" alt="Personel di outlet" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-white/10 group">
+          <img src="https://i.ibb.co.com/svZfcbvZ/jaga-personil-outlet.png" alt="Personel di outlet" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-white/10 group">
+          <img src="https://i.ibb.co.com/6cNmRfZx/jaga-personil-outlet2.png" alt="Personel di outlet" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
     <div class="reveal mt-14 text-center">
       <p class="text-white/50 text-sm mb-6">Butuh layanan keamanan yang disesuaikan dengan kebutuhan Anda?</p>
       <a href="#kontak" class="btn-primary">
         Konsultasi Gratis Sekarang
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-        </svg>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
       </a>
     </div>
   </div>
 </section>
 
-
-<!-- ============================================================
-     4. PORTOFOLIO EVENT
-     ============================================================ -->
+<!-- ============ PORTOFOLIO ============ -->
 <section id="portofolio" class="relative py-24 sm:py-32 bg-jaga-black overflow-hidden">
   <div class="red-glow w-[550px] h-[550px] bg-jaga-red/12 top-1/3 -right-40"></div>
   <div class="absolute inset-0 grid-pattern opacity-25 pointer-events-none"></div>
-
   <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
-
-    <!-- Heading -->
     <div class="max-w-3xl mb-12">
       <span class="reveal eyebrow">Portofolio Event</span>
       <h2 class="reveal font-display font-extrabold text-3xl sm:text-4xl lg:text-[2.85rem] leading-tight mt-5 mb-5">
         Dipercaya Mengamankan <span class="text-gradient-red">Ratusan Event</span> Nasional &amp; Internasional
       </h2>
       <p class="reveal text-white/60 leading-relaxed">
-        Sejak tahun 2022 hingga 2024, JAGA INDONESIA telah dipercaya sebagai mitra
-        pengamanan untuk ratusan konser, festival, kampanye akbar, hingga ajang penghargaan
-        bergengsi — baik skala nasional maupun internasional.
+        Sejak tahun 2022 hingga 2024, JAGA INDONESIA telah dipercaya sebagai mitra pengamanan untuk ratusan konser, festival, kampanye akbar, hingga ajang penghargaan bergengsi.
       </p>
     </div>
 
-    <!-- Stats strip -->
     <div class="reveal grid grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
-      <div class="p-5 rounded-2xl bg-gradient-to-br from-white/[.06] to-transparent border border-white/10">
-        <div class="font-display font-extrabold text-3xl text-gradient-red">2022</div>
-        <div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1.5">Awal Portofolio</div>
-      </div>
-      <div class="p-5 rounded-2xl bg-gradient-to-br from-white/[.06] to-transparent border border-white/10">
-        <div class="font-display font-extrabold text-3xl text-gradient-red"><span data-count="300">0</span>+</div>
-        <div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1.5">Event Diamankan</div>
-      </div>
-      <div class="p-5 rounded-2xl bg-gradient-to-br from-white/[.06] to-transparent border border-white/10">
-        <div class="font-display font-extrabold text-3xl text-gradient-red"><span data-count="40">0</span>+</div>
-        <div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1.5">Artis Internasional</div>
-      </div>
-      <div class="p-5 rounded-2xl bg-gradient-to-br from-white/[.06] to-transparent border border-white/10">
-        <div class="font-display font-extrabold text-3xl text-gradient-red">24/7</div>
-        <div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1.5">Kesiapan Operasional</div>
-      </div>
+      <div class="p-5 rounded-2xl bg-gradient-to-br from-white/[.06] to-transparent border border-white/10"><div class="font-display font-extrabold text-3xl text-gradient-red">2022</div><div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1.5">Awal Portofolio</div></div>
+      <div class="p-5 rounded-2xl bg-gradient-to-br from-white/[.06] to-transparent border border-white/10"><div class="font-display font-extrabold text-3xl text-gradient-red"><span data-count="300">0</span>+</div><div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1.5">Event Diamankan</div></div>
+      <div class="p-5 rounded-2xl bg-gradient-to-br from-white/[.06] to-transparent border border-white/10"><div class="font-display font-extrabold text-3xl text-gradient-red"><span data-count="40">0</span>+</div><div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1.5">Artis Internasional</div></div>
+      <div class="p-5 rounded-2xl bg-gradient-to-br from-white/[.06] to-transparent border border-white/10"><div class="font-display font-extrabold text-3xl text-gradient-red">24/7</div><div class="text-[.66rem] tracking-[.18em] uppercase text-white/45 mt-1.5">Kesiapan Operasional</div></div>
     </div>
 
-    <!-- Filter tabs -->
-    <div class="reveal flex flex-wrap gap-3 mb-10" role="tablist" aria-label="Filter portofolio event">
-      <button class="tab-btn active" data-filter="all" role="tab" aria-selected="true">Semua Event</button>
-      <button class="tab-btn" data-filter="international" role="tab" aria-selected="false">Internasional</button>
-      <button class="tab-btn" data-filter="national" role="tab" aria-selected="false">Nasional</button>
+    <div class="reveal flex flex-wrap gap-3 mb-10" role="tablist">
+      <button class="tab-btn active" data-filter="all" role="tab">Semua Event</button>
+      <button class="tab-btn" data-filter="international" role="tab">Internasional</button>
+      <button class="tab-btn" data-filter="national" role="tab">Nasional</button>
     </div>
 
-    <!-- Event grid -->
     <div id="eventGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2024</span></div><h3 class="font-display font-bold text-white text-base mb-2">HAMMERSONIC Festival</h3><p class="text-sm text-white/50 leading-relaxed">Lamb of God — pengamanan area festival &amp; crowd management.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2024</span></div><h3 class="font-display font-bold text-white text-base mb-2">JONAS BROTHERS</h3><p class="text-sm text-white/50 leading-relaxed">Live Concert — pengamanan VVIP, akses kontrol, crowd.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2024</span></div><h3 class="font-display font-bold text-white text-base mb-2">LOUIS TOMLINSON</h3><p class="text-sm text-white/50 leading-relaxed">World Tour — pengamanan area konser dan backstage.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2024</span></div><h3 class="font-display font-bold text-white text-base mb-2">ALAN WALKER</h3><p class="text-sm text-white/50 leading-relaxed">Rave Party — crowd management &amp; pengamanan panggung.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">NCT DREAM</h3><p class="text-sm text-white/50 leading-relaxed">Korean Artist — pengamanan ketat &amp; pengaturan antrean.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">HAMMERSONIC "Rise of the Empire"</h3><p class="text-sm text-white/50 leading-relaxed">SLIPKNOT — festival metal internasional besar.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">SOUNDRENALINE</h3><p class="text-sm text-white/50 leading-relaxed">Thirty Seconds to Mars — konser &amp; crowd management.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">AURORA</h3><p class="text-sm text-white/50 leading-relaxed">The Gods We Can Touch Asia Tour — akses &amp; area.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">JACOB COLLIER</h3><p class="text-sm text-white/50 leading-relaxed">Live Concert in Jakarta — protokol VIP.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2022</span></div><h3 class="font-display font-bold text-white text-base mb-2">MICHAEL LEARNS TO ROCK</h3><p class="text-sm text-white/50 leading-relaxed">Konser — pengamanan area &amp; penonton.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">THE CORRS</h3><p class="text-sm text-white/50 leading-relaxed">Live in Jakarta — panggung, akses, area publik.</p></article>
+      <article class="event-item card p-6" data-cat="international"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">BRING ME THE HORIZON</h3><p class="text-sm text-white/50 leading-relaxed">Konser internasional — crowd control.</p></article>
 
-      <!-- INTERNASIONAL -->
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2024</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">HAMMERSONIC Festival</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Lamb of God — pengamanan area festival &amp; crowd management skala besar.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2024</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">JONAS BROTHERS</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Live Concert — pengamanan VVIP, akses kontrol, dan pengelolaan massa.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2024</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">LOUIS TOMLINSON</h3>
-        <p class="text-sm text-white/50 leading-relaxed">World Tour — pengamanan menyeluruh area konser dan backstage.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2024</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">ALAN WALKER</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Rave Party — crowd management &amp; pengamanan area panggung.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">NCT DREAM</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Korean Artist Concert — pengamanan ketat &amp; pengaturan antrean penonton.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">HAMMERSONIC "Rise of the Empire"</h3>
-        <p class="text-sm text-white/50 leading-relaxed">SLIPKNOT — festival metal internasional berskala besar.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">SOUNDRENALINE</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Thirty Seconds to Mars — pengamanan konser &amp; pengelolaan kerumunan.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">AURORA</h3>
-        <p class="text-sm text-white/50 leading-relaxed">The Gods We Can Touch Asia Tour — pengamanan area &amp; akses penonton.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">JACOB COLLIER</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Live Concert in Jakarta — pengamanan menyeluruh &amp; protokol VIP.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2022</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">MICHAEL LEARNS TO ROCK</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Konser — pengamanan area dan pengelolaan penonton.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">THE CORRS</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Live in Jakarta — pengamanan panggung, akses, dan area publik.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="international">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-jaga-red/15 border border-jaga-red/40 text-jaga-red">Internasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">BRING ME THE HORIZON</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Konser internasional — crowd control &amp; pengamanan area festival.</p>
-      </article>
-
-      <!-- NASIONAL -->
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2024</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">AMI MUSIC AWARD</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Ajang penghargaan musik nasional — pengamanan red carpet &amp; area utama.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2024</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">KAMPANYE PRABOWO — GIBRAN</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Kampanye akbar — pengamanan massa berskala besar &amp; pengaturan kerumunan.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">SHEILA ON 7</h3>
-        <p class="text-sm text-white/50 leading-relaxed">"Tunggu Aku di Jakarta" — pengamanan konser &amp; pengelolaan penonton.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">DEWA 19</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Live Concert — pengamanan area konser dan pengaturan akses.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">PADI REBORN</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Live Concert — pengamanan panggung &amp; crowd management.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">GLEN FREDLY — 25 Years of Music</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Konser peringatan — pengamanan menyeluruh area acara.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">GIGI Live Concert</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Pengamanan konser &amp; pengaturan alur penonton.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">HINDIA Live Concert</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Pengamanan konser &amp; pengelolaan massa penonton.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">NADIN AMIZAH</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Live Concert — pengamanan area &amp; pengaturan akses penonton.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2022</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">NOAH Live Concert</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Pengamanan konser nasional skala besar.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">SEMESTA BERPESTA</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Festival musik — crowd management &amp; pengamanan area festival.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">MANGROVE JAZZ FESTIVAL</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Festival jazz — pengamanan area &amp; pengaturan pengunjung.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2024</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">FAMILY FESTIVAL (Sheila On 7)</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Festival keluarga — pengamanan &amp; pengelolaan kerumunan.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2024</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">PESTA RAKYAT 7 PANGGUNG</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Acara rakyat — pengamanan multi-area &amp; pengaturan massa.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">DEKLARASI PRABOWO — GIBRAN</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Pengamanan acara politik berskala besar &amp; crowd control.</p>
-      </article>
-
-      <article class="event-item card p-6" data-cat="national">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span>
-          <span class="text-xs font-bold text-white/35">2023</span>
-        </div>
-        <h3 class="font-display font-bold text-white text-base mb-2">EVORIA FESTIVAL</h3>
-        <p class="text-sm text-white/50 leading-relaxed">Festival musik — pengamanan area &amp; pengelolaan pengunjung.</p>
-      </article>
-
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2024</span></div><h3 class="font-display font-bold text-white text-base mb-2">AMI MUSIC AWARD</h3><p class="text-sm text-white/50 leading-relaxed">Penghargaan musik nasional — red carpet &amp; area utama.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2024</span></div><h3 class="font-display font-bold text-white text-base mb-2">KAMPANYE PRABOWO — GIBRAN</h3><p class="text-sm text-white/50 leading-relaxed">Kampanye akbar — pengamanan massa skala besar.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">SHEILA ON 7</h3><p class="text-sm text-white/50 leading-relaxed">"Tunggu Aku di Jakarta" — konser &amp; penonton.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">DEWA 19</h3><p class="text-sm text-white/50 leading-relaxed">Live Concert — area &amp; akses konser.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">PADI REBORN</h3><p class="text-sm text-white/50 leading-relaxed">Live Concert — panggung &amp; crowd management.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">GLEN FREDLY — 25 Years of Music</h3><p class="text-sm text-white/50 leading-relaxed">Konser peringatan — pengamanan menyeluruh.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">GIGI Live Concert</h3><p class="text-sm text-white/50 leading-relaxed">Pengamanan konser &amp; alur penonton.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">HINDIA Live Concert</h3><p class="text-sm text-white/50 leading-relaxed">Konser &amp; pengelolaan massa penonton.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">NADIN AMIZAH</h3><p class="text-sm text-white/50 leading-relaxed">Live Concert — pengamanan area &amp; akses.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2022</span></div><h3 class="font-display font-bold text-white text-base mb-2">NOAH Live Concert</h3><p class="text-sm text-white/50 leading-relaxed">Konser nasional skala besar.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">SEMESTA BERPESTA</h3><p class="text-sm text-white/50 leading-relaxed">Festival musik — crowd management.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">MANGROVE JAZZ FESTIVAL</h3><p class="text-sm text-white/50 leading-relaxed">Festival jazz — area &amp; pengunjung.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2024</span></div><h3 class="font-display font-bold text-white text-base mb-2">FAMILY FESTIVAL (Sheila On 7)</h3><p class="text-sm text-white/50 leading-relaxed">Festival keluarga — crowd control.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2024</span></div><h3 class="font-display font-bold text-white text-base mb-2">PESTA RAKYAT 7 PANGGUNG</h3><p class="text-sm text-white/50 leading-relaxed">Acara rakyat — multi-area &amp; massa.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">DEKLARASI PRABOWO — GIBRAN</h3><p class="text-sm text-white/50 leading-relaxed">Acara politik — crowd control.</p></article>
+      <article class="event-item card p-6" data-cat="national"><div class="flex items-start justify-between gap-4 mb-4"><span class="px-3 py-1 rounded-full text-[.6rem] font-bold tracking-[.16em] uppercase bg-white/8 border border-white/18 text-white/70">Nasional</span><span class="text-xs font-bold text-white/35">2023</span></div><h3 class="font-display font-bold text-white text-base mb-2">EVORIA FESTIVAL</h3><p class="text-sm text-white/50 leading-relaxed">Festival musik — area &amp; pengunjung.</p></article>
     </div>
 
-    <p class="reveal text-center text-white/35 text-xs mt-10 tracking-wide">
-      *Daftar di atas merupakan sebagian dari ratusan event yang telah kami amankan sepanjang 2022–2024.
-    </p>
+    <p class="reveal text-center text-white/35 text-xs mt-10 tracking-wide">*Daftar di atas merupakan sebagian dari ratusan event yang telah kami amankan sepanjang 2022–2024.</p>
   </div>
 </section>
 
-
-<!-- ============================================================
-     5. KLIEN / MITRA
-     ============================================================ -->
+<!-- ============ KLIEN ============ -->
 <section id="klien" class="relative py-24 sm:py-32 bg-jaga-coal/40 border-y border-white/8 overflow-hidden">
   <div class="red-glow w-[480px] h-[480px] bg-jaga-red/10 bottom-0 -left-40"></div>
-
   <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
-
     <div class="max-w-3xl mb-14">
       <span class="reveal eyebrow">Klien &amp; Mitra</span>
       <h2 class="reveal font-display font-extrabold text-3xl sm:text-4xl lg:text-[2.85rem] leading-tight mt-5 mb-5">
         Dipercaya oleh <span class="text-gradient-red">Brand Terkemuka</span>
       </h2>
       <p class="reveal text-white/60 leading-relaxed">
-        Kami bangga menjadi mitra keamanan bagi berbagai restoran, lounge, hotel,
-        klub, dan perusahaan ternama di Indonesia.
+        Kami bangga menjadi mitra keamanan bagi berbagai restoran, lounge, hotel, klub, dan perusahaan ternama di Indonesia.
       </p>
     </div>
-
     <div class="reveal grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
       <div class="client-tile">The Union Group</div>
       <div class="client-tile">Union</div>
@@ -1275,107 +591,80 @@
       <div class="client-tile">Q Kopitiam</div>
       <div class="client-tile">Skydance</div>
     </div>
-
   </div>
 </section>
 
+<!-- ============ PETA ============ -->
+<section id="peta" class="relative py-24 sm:py-32 bg-jaga-black overflow-hidden">
+  <div class="red-glow w-[500px] h-[500px] bg-jaga-red/10 top-20 -left-40"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-3xl mb-12">
+      <span class="reveal eyebrow">Jangkauan Operasional</span>
+      <h2 class="reveal font-display font-extrabold text-3xl sm:text-4xl lg:text-[2.85rem] leading-tight mt-5 mb-5">
+        Kantor Pusat &amp; <span class="text-gradient-red">Outlet yang Kami Jaga</span>
+      </h2>
+      <p class="reveal text-white/60 leading-relaxed">
+        Kami dipercaya menjaga berbagai restoran, lounge, dan venue ternama di Jakarta. Berikut lokasi kantor pusat kami beserta outlet-outlet klien yang berada dalam pengamanan JAGA INDONESIA.
+      </p>
+    </div>
+    <div class="reveal rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+      <div id="map" class="w-full h-[500px] sm:h-[600px]"></div>
+    </div>
+    <div class="reveal flex flex-wrap items-center gap-6 mt-6 text-sm">
+      <div class="flex items-center gap-2.5"><span class="w-3.5 h-3.5 rounded-full bg-jaga-red border-2 border-white/30"></span><span class="text-white/70">Kantor Pusat JAGA INDONESIA</span></div>
+      <div class="flex items-center gap-2.5"><span class="w-3.5 h-3.5 rounded-full bg-[#3B82F6] border-2 border-white/30"></span><span class="text-white/70">Outlet Klien &amp; Mitra</span></div>
+    </div>
+  </div>
+</section>
 
-<!-- ============================================================
-     6. KONTAK / FOOTER
-     ============================================================ -->
+<!-- ============ KONTAK / FOOTER ============ -->
 <section id="kontak" class="relative pt-24 sm:pt-32 pb-0 bg-jaga-black overflow-hidden">
   <div class="red-glow w-[560px] h-[560px] bg-jaga-red/12 -top-20 left-1/3"></div>
   <div class="absolute inset-0 grid-pattern opacity-20 pointer-events-none"></div>
-
   <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
-
-    <!-- Heading -->
     <div class="max-w-3xl mb-14">
       <span class="reveal eyebrow">Hubungi Kami</span>
       <h2 class="reveal font-display font-extrabold text-3xl sm:text-4xl lg:text-[2.85rem] leading-tight mt-5 mb-5">
         Siap Memberikan <span class="text-gradient-red">Rasa Aman</span> untuk Anda
       </h2>
-      <p class="reveal text-white/60 leading-relaxed">
-        Diskusikan kebutuhan keamanan Anda dengan tim kami. Kami siap memberikan
-        solusi yang tepat, cepat, dan profesional.
-      </p>
+      <p class="reveal text-white/60 leading-relaxed">Diskusikan kebutuhan keamanan Anda dengan tim kami. Kami siap memberikan solusi yang tepat, cepat, dan profesional.</p>
     </div>
 
     <div class="grid lg:grid-cols-5 gap-8 mb-20">
-
-      <!-- Contact cards -->
       <div class="lg:col-span-3 grid sm:grid-cols-2 gap-5">
-
-        <!-- Alamat -->
         <div class="reveal card p-7 sm:col-span-2">
-          <div class="icon-box mb-5">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-          </div>
+          <div class="icon-box mb-5"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
           <h3 class="font-display font-bold text-white mb-2">Alamat Kantor</h3>
-          <p class="text-sm text-white/60 leading-relaxed">
-            Jl. Cibulan 2 No.10, Petogogan,<br />Kebayoran Baru, Jakarta
-          </p>
+          <p class="text-sm text-white/60 leading-relaxed">Jl. Cibulan 2 No.10, Petogogan,<br />Kebayoran Baru, Jakarta</p>
         </div>
-
-        <!-- Telepon -->
         <div class="reveal card p-7">
-          <div class="icon-box mb-5">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
-            </svg>
-          </div>
+          <div class="icon-box mb-5"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg></div>
           <h3 class="font-display font-bold text-white mb-3">Telepon</h3>
           <div class="space-y-2">
             <a href="tel:0217201252" class="block text-sm text-white/60 hover:text-jaga-red transition-colors">021 7201252</a>
             <a href="tel:081383094234" class="block text-sm text-white/60 hover:text-jaga-red transition-colors">0813 8309 4234</a>
           </div>
         </div>
-
-        <!-- Jam operasional -->
         <div class="reveal card p-7">
-          <div class="icon-box mb-5">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
+          <div class="icon-box mb-5"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
           <h3 class="font-display font-bold text-white mb-3">Operasional</h3>
-          <p class="text-sm text-white/60 leading-relaxed">
-            Layanan &amp; tanggap cepat<br />
-            <span class="text-jaga-red font-semibold">24 Jam / 7 Hari</span>
-          </p>
+          <p class="text-sm text-white/60 leading-relaxed">Layanan &amp; tanggap cepat<br /><span class="text-jaga-red font-semibold">24 Jam / 7 Hari</span></p>
         </div>
-
       </div>
 
-      <!-- CTA panel -->
       <div class="lg:col-span-2 reveal">
         <div class="h-full p-8 rounded-3xl bg-gradient-to-br from-jaga-red via-jaga-dark to-jaga-deep relative overflow-hidden shadow-2xl shadow-jaga-red/25">
           <div class="absolute inset-0 grid-pattern opacity-25"></div>
           <div class="relative z-10 h-full flex flex-col">
-            <h3 class="font-display font-extrabold text-2xl text-white mb-3 leading-tight">
-              Butuh Keamanan Segera?
-            </h3>
-            <p class="text-white/80 text-sm leading-relaxed mb-8">
-              Tim kami siap merespons kebutuhan Anda dengan cepat dan profesional.
-              Hubungi kami melalui telepon atau WhatsApp.
-            </p>
-
+            <h3 class="font-display font-extrabold text-2xl text-white mb-3 leading-tight">Butuh Keamanan Segera?</h3>
+            <p class="text-white/80 text-sm leading-relaxed mb-8">Tim kami siap merespons kebutuhan Anda dengan cepat dan profesional.</p>
             <div class="space-y-3 mt-auto">
-              <a href="https://wa.me/6281383094234" target="_blank" rel="noopener noreferrer"
-                 class="flex items-center justify-center gap-2.5 w-full py-4 rounded-full bg-white text-jaga-black font-bold text-xs tracking-[.14em] uppercase hover:bg-white/90 transition-all hover:-translate-y-0.5 shadow-lg">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
+              <a href="https://wa.me/6281383094234" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2.5 w-full py-4 rounded-full bg-white text-jaga-black font-bold text-xs tracking-[.14em] uppercase hover:bg-white/90 transition-all hover:-translate-y-0.5 shadow-lg">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 WhatsApp Kami
               </a>
-              <a href="tel:081383094234"
-                 class="flex items-center justify-center gap-2.5 w-full py-4 rounded-full border border-white/40 text-white font-bold text-xs tracking-[.14em] uppercase hover:bg-white/10 transition-all hover:-translate-y-0.5">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
-                </svg>
+              <a href="tel:081383094234" class="flex items-center justify-center gap-2.5 w-full py-4 rounded-full border border-white/40 text-white font-bold text-xs tracking-[.14em] uppercase hover:bg-white/10 transition-all hover:-translate-y-0.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>
                 Telepon Sekarang
               </a>
             </div>
@@ -1384,66 +673,32 @@
       </div>
     </div>
 
-    <!-- ============ FOOTER ============ -->
     <footer class="border-t border-white/8 pt-14 pb-10">
       <div class="grid md:grid-cols-12 gap-10 mb-12">
-
-        <!-- Brand -->
         <div class="md:col-span-5">
-          <img
-            src="https://i.ibb.co.com/5XD3v0Gy/logo-jaga-indonesia-no-bg.png"
-            alt="Logo JAGA INDONESIA"
-            class="h-12 w-auto object-contain mb-5"
-            loading="lazy"
-          />
-          <p class="text-sm text-white/50 leading-relaxed max-w-sm mb-6">
-            Perusahaan jasa pengamanan &amp; penyelamatan berizin resmi Mabes Polri sejak 2010.
-            <span class="text-white/70 font-medium">Crowd Management · Safety · Security.</span>
-          </p>
-
-          <!-- Sosial media -->
+          <img src="https://i.ibb.co.com/5XD3v0Gy/logo-jaga-indonesia-no-bg.png" alt="Logo JAGA INDONESIA" class="h-12 w-auto object-contain mb-5" loading="lazy" />
+          <p class="text-sm text-white/50 leading-relaxed max-w-sm mb-6">Perusahaan jasa pengamanan &amp; penyelamatan berizin resmi Mabes Polri sejak 2010. <span class="text-white/70 font-medium">Crowd Management · Safety · Security.</span></p>
           <div class="flex items-center gap-3">
-            <a href="#" aria-label="Instagram JAGA INDONESIA"
-               class="w-10 h-10 rounded-xl border border-white/12 bg-white/[.04] flex items-center justify-center text-white/60 hover:text-white hover:border-jaga-red hover:bg-jaga-red/15 transition-all hover:-translate-y-0.5">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-              </svg>
+            <a href="https://instagram.com/jagaindonesia_securityevent" target="_blank" rel="noopener noreferrer" aria-label="Instagram JAGA INDONESIA" class="w-10 h-10 rounded-xl border border-white/12 bg-white/[.04] flex items-center justify-center text-white/60 hover:text-white hover:border-jaga-red hover:bg-jaga-red/15 transition-all hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             </a>
-            <a href="#" aria-label="Facebook JAGA INDONESIA"
-               class="w-10 h-10 rounded-xl border border-white/12 bg-white/[.04] flex items-center justify-center text-white/60 hover:text-white hover:border-jaga-red hover:bg-jaga-red/15 transition-all hover:-translate-y-0.5">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a href="#" aria-label="LinkedIn JAGA INDONESIA"
-               class="w-10 h-10 rounded-xl border border-white/12 bg-white/[.04] flex items-center justify-center text-white/60 hover:text-white hover:border-jaga-red hover:bg-jaga-red/15 transition-all hover:-translate-y-0.5">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </a>
-            <a href="https://wa.me/6281383094234" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp JAGA INDONESIA"
-               class="w-10 h-10 rounded-xl border border-white/12 bg-white/[.04] flex items-center justify-center text-white/60 hover:text-white hover:border-jaga-red hover:bg-jaga-red/15 transition-all hover:-translate-y-0.5">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
+            <a href="https://wa.me/6281383094234" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp JAGA INDONESIA" class="w-10 h-10 rounded-xl border border-white/12 bg-white/[.04] flex items-center justify-center text-white/60 hover:text-white hover:border-jaga-red hover:bg-jaga-red/15 transition-all hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </a>
           </div>
         </div>
-
-        <!-- Navigasi -->
         <div class="md:col-span-3">
           <h4 class="text-[.68rem] font-bold tracking-[.24em] uppercase text-white/40 mb-5">Navigasi</h4>
           <ul class="space-y-3">
-            <li><a href="#beranda"    class="text-sm text-white/55 hover:text-jaga-red transition-colors">Beranda</a></li>
-            <li><a href="#tentang"    class="text-sm text-white/55 hover:text-jaga-red transition-colors">Tentang Kami</a></li>
-            <li><a href="#layanan"    class="text-sm text-white/55 hover:text-jaga-red transition-colors">Layanan</a></li>
+            <li><a href="#beranda" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Beranda</a></li>
+            <li><a href="#tentang" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Tentang Kami</a></li>
+            <li><a href="#layanan" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Layanan</a></li>
             <li><a href="#portofolio" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Portofolio</a></li>
-            <li><a href="#klien"      class="text-sm text-white/55 hover:text-jaga-red transition-colors">Klien</a></li>
-            <li><a href="#kontak"     class="text-sm text-white/55 hover:text-jaga-red transition-colors">Kontak</a></li>
+            <li><a href="#klien" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Klien</a></li>
+            <li><a href="#peta" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Peta</a></li>
+            <li><a href="#kontak" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Kontak</a></li>
           </ul>
         </div>
-
-        <!-- Layanan -->
         <div class="md:col-span-2">
           <h4 class="text-[.68rem] font-bold tracking-[.24em] uppercase text-white/40 mb-5">Layanan</h4>
           <ul class="space-y-3">
@@ -1454,8 +709,6 @@
             <li class="text-sm text-white/55">Tenaga Medis</li>
           </ul>
         </div>
-
-        <!-- Kontak -->
         <div class="md:col-span-2">
           <h4 class="text-[.68rem] font-bold tracking-[.24em] uppercase text-white/40 mb-5">Kontak</h4>
           <ul class="space-y-3">
@@ -1465,45 +718,28 @@
           </ul>
         </div>
       </div>
-
-      <!-- Bottom bar -->
       <div class="pt-7 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="text-xs text-white/35 text-center sm:text-left">
-          &copy; <span id="year">2024</span> JAGA INDONESIA. All rights reserved.
-        </p>
-        <p class="text-xs text-white/30 text-center sm:text-right">
-          Crowd Management &nbsp;·&nbsp; Safety &nbsp;·&nbsp; Security
-        </p>
+        <p class="text-xs text-white/35 text-center sm:text-left">&copy; <span id="year">2024</span> JAGA INDONESIA. All rights reserved.</p>
+        <p class="text-xs text-white/30 text-center sm:text-right">Crowd Management &nbsp;·&nbsp; Safety &nbsp;·&nbsp; Security</p>
       </div>
     </footer>
   </div>
 </section>
 
-
-<!-- ============================================================
-     BACK TO TOP
-     ============================================================ -->
-<button id="toTop" aria-label="Kembali ke atas"
-  class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-jaga-red to-jaga-dark text-white flex items-center justify-center shadow-2xl shadow-jaga-red/40 hover:scale-110 transition-transform">
-  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
-  </svg>
+<button id="toTop" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-jaga-red to-jaga-dark text-white flex items-center justify-center shadow-2xl shadow-jaga-red/40 hover:scale-110 transition-transform">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
 </button>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
-<!-- ============================================================
-     JAVASCRIPT
-     ============================================================ -->
 <script>
 (function () {
   'use strict';
 
-  /* ---------------------------------------------------------
-     1. HEADER SCROLL STATE
-     --------------------------------------------------------- */
+  // HEADER SCROLL
   const header = document.getElementById('header');
-  const toTop  = document.getElementById('toTop');
-
+  const toTop = document.getElementById('toTop');
   function onScroll() {
     const y = window.scrollY || window.pageYOffset;
     header.classList.toggle('header-scrolled', y > 40);
@@ -1511,204 +747,188 @@
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  toTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  /* ---------------------------------------------------------
-     2. MOBILE MENU
-     --------------------------------------------------------- */
+  // MOBILE MENU
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
-
   function closeMenu() {
     mobileMenu.classList.remove('open');
     hamburger.classList.remove('active');
     hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.setAttribute('aria-label', 'Buka menu navigasi');
   }
-
   hamburger.addEventListener('click', () => {
     const isOpen = mobileMenu.classList.toggle('open');
     hamburger.classList.toggle('active', isOpen);
     hamburger.setAttribute('aria-expanded', String(isOpen));
-    hamburger.setAttribute('aria-label', isOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi');
   });
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+  window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-  document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  // Close on resize to desktop
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 1024) closeMenu();
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
-  });
-
-  /* ---------------------------------------------------------
-     3. ACTIVE NAV LINK (scroll spy)
-     --------------------------------------------------------- */
+  // SCROLL SPY
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
-
-  const spyObserver = new IntersectionObserver((entries) => {
+  const spy = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
-        navLinks.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-        });
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
       }
     });
-  }, {
-    rootMargin: '-45% 0px -50% 0px',
-    threshold: 0
-  });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => spy.observe(s));
 
-  sections.forEach(sec => spyObserver.observe(sec));
-
-  /* ---------------------------------------------------------
-     4. SCROLL REVEAL
-     --------------------------------------------------------- */
-  const revealEls = document.querySelectorAll('.reveal');
-
-  const revealObserver = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, {
-    rootMargin: '0px 0px -80px 0px',
-    threshold: 0.08
-  });
-
-  revealEls.forEach((el, i) => {
-    // stagger children within the same batch
+  // REVEAL
+  const revealObs = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -80px 0px', threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
     el.style.transitionDelay = (Math.min(i, 6) * 55) + 'ms';
-    revealObserver.observe(el);
+    revealObs.observe(el);
   });
 
-  /* ---------------------------------------------------------
-     5. COUNTER ANIMATION
-     --------------------------------------------------------- */
-  const counters = document.querySelectorAll('[data-count]');
-
-  function animateCounter(el) {
-    const target = parseInt(el.getAttribute('data-count'), 10);
-
-    // Raw mode: for year (2010) — jump instantly, no counting
-    if (el.getAttribute('data-raw') === 'true') {
-      el.textContent = target;
-      return;
-    }
-
-    const duration = 1600;
-    const start = performance.now();
-
-    function step(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      // easeOutExpo
-      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      el.textContent = Math.floor(eased * target).toLocaleString('id-ID');
-      if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = target.toLocaleString('id-ID');
-    }
-    requestAnimationFrame(step);
-  }
-
-  const counterObserver = new IntersectionObserver((entries, obs) => {
+  // COUNTER
+  const counterObs = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        obs.unobserve(entry.target);
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        if (el.getAttribute('data-raw') === 'true') { el.textContent = target; obs.unobserve(el); return; }
+        const duration = 1600, start = performance.now();
+        function step(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
+          el.textContent = Math.floor(eased * target).toLocaleString('id-ID');
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = target.toLocaleString('id-ID');
+        }
+        requestAnimationFrame(step);
+        obs.unobserve(el);
       }
     });
   }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(c => counterObs.observe(c));
 
-  counters.forEach(c => counterObserver.observe(c));
-
-  /* ---------------------------------------------------------
-     6. PORTFOLIO FILTER
-     --------------------------------------------------------- */
+  // PORTFOLIO FILTER
   const tabButtons = document.querySelectorAll('.tab-btn');
   const eventItems = document.querySelectorAll('.event-item');
-
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = btn.getAttribute('data-filter');
-
-      tabButtons.forEach(b => {
-        const isActive = b === btn;
-        b.classList.toggle('active', isActive);
-        b.setAttribute('aria-selected', String(isActive));
-      });
-
+      tabButtons.forEach(b => b.classList.toggle('active', b === btn));
       eventItems.forEach(item => {
-        const cat = item.getAttribute('data-cat');
-        const show = (filter === 'all' || cat === filter);
+        const show = (filter === 'all' || item.getAttribute('data-cat') === filter);
         item.classList.toggle('hidden-item', !show);
-
         if (show) {
-          // small fade-in re-trigger
-          item.style.opacity = '0';
-          item.style.transform = 'translateY(14px)';
+          item.style.opacity = '0'; item.style.transform = 'translateY(14px)';
           requestAnimationFrame(() => {
             item.style.transition = 'opacity .45s ease, transform .45s cubic-bezier(.22,1,.36,1)';
-            item.style.opacity = '1';
-            item.style.transform = 'none';
+            item.style.opacity = '1'; item.style.transform = 'none';
           });
         }
       });
     });
   });
 
-  /* ---------------------------------------------------------
-     7. SMOOTH ANCHOR SCROLL (fallback for older browsers)
-     --------------------------------------------------------- */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
       if (!href || href === '#' || href.length < 2) return;
-
-      const target = document.querySelector(href);
-      if (!target) return;
-
+      const t = document.querySelector(href);
+      if (!t) return;
       e.preventDefault();
-      const offset = 80;
-      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-
-      window.scrollTo({ top: top, behavior: 'smooth' });
+      const top = t.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
       history.pushState(null, '', href);
     });
   });
 
-  /* ---------------------------------------------------------
-     8. DYNAMIC YEAR
-     --------------------------------------------------------- */
+  // YEAR
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------------------------------------------------------
-     9. IMAGE FALLBACK (hero background safety)
-     --------------------------------------------------------- */
-  const heroBg = document.querySelector('.hero-bg');
-  if (heroBg) {
-    const testImg = new Image();
-    testImg.onerror = function () {
-      heroBg.style.backgroundImage =
-        'linear-gradient(90deg, rgba(11,11,13,.97) 0%, rgba(11,11,13,.88) 40%, rgba(11,11,13,.55) 100%),' +
-        'linear-gradient(180deg, rgba(11,11,13,.95) 0%, rgba(11,11,13,.40) 42%, rgba(11,11,13,1) 100%),' +
-        'radial-gradient(circle at 75% 30%, rgba(225,29,46,.35), transparent 60%)';
-    };
-    testImg.src = 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1920&q=80';
-  }
+  // MAP
+  (function initMap() {
+    const mapEl = document.getElementById('map');
+    if (!mapEl || typeof L === 'undefined') return;
+
+    const map = L.map('map', {
+      center: [-6.2350, 106.8100],
+      zoom: 13,
+      scrollWheelZoom: false,
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19,
+    }).addTo(map);
+
+    const officeIcon = L.divIcon({
+      className: 'custom-marker-office',
+      html: `<div style="width:34px;height:34px;border-radius:50% 50% 50% 0;background:linear-gradient(135deg,#E11D2E,#B3121F);transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 4px 14px rgba(225,29,46,.7);display:flex;align-items:center;justify-content:center;"><div style="width:10px;height:10px;border-radius:50%;background:#fff;transform:rotate(45deg);"></div></div>`,
+      iconSize: [34, 34], iconAnchor: [17, 34], popupAnchor: [0, -34],
+    });
+
+    const outletIcon = L.divIcon({
+      className: 'custom-marker-outlet',
+      html: `<div style="width:22px;height:22px;border-radius:50%;background:#3B82F6;border:2.5px solid #fff;box-shadow:0 3px 10px rgba(59,130,246,.6);"></div>`,
+      iconSize: [22, 22], iconAnchor: [11, 11], popupAnchor: [0, -11],
+    });
+
+    const locations = [
+      { lat: -6.2445, lng: 106.7975, name: 'Kantor Pusat JAGA INDONESIA', address: 'Jl. Cibulan 2 No.10, Petogogan, Kebayoran Baru, Jakarta 12170', phone: '021 7201252 / 0813 8309 4234', type: 'office' },
+      { lat: -6.2255, lng: 106.8095, name: 'The Union Group — Plaza Mutiara', address: 'Plaza Mutiara Lt. 5 Suite 503, Jl. DR. Ide Anak Agung Gde Agung Kav. 1-2, Jakarta Selatan', type: 'client' },
+      { lat: -6.2244, lng: 106.7989, name: 'Union — Plaza Senayan', address: 'Plaza Senayan Ground Floor, Jl. Asia Afrika No.8, Jakarta Pusat', type: 'client' },
+      { lat: -6.2260, lng: 106.8005, name: 'Cork & Screw — Plaza Indonesia', address: 'Plaza Indonesia L.1 Unit J127, Jl. M.H. Thamrin No.28-30, Jakarta Pusat', type: 'client' },
+      { lat: -6.2245, lng: 106.8090, name: 'Cork & Screw — Pacific Place', address: 'Pacific Place Mall Ground Floor Unit 51C, Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan', type: 'client' },
+      { lat: -6.2248, lng: 106.8085, name: 'Roma Osteria & Bar — SCBD', address: 'Sequis Tower Ground Floor, Jl. Jend. Sudirman Kav. 71, SCBD Senayan, Jakarta Selatan', type: 'client' },
+      { lat: -6.2620, lng: 106.7830, name: 'Roma Osteria & Bar — Pondok Indah', address: 'Pondok Indah Mall 3 Ground Floor, Jl. Metro Pondok Indah Kav. IV, Jakarta Selatan', type: 'client' },
+      { lat: -6.2242, lng: 106.8095, name: 'Bistecca — SCBD', address: '18 Parc Place Tower C Ground Floor, Jl. Jenderal Sudirman Kav. 52-53, Jakarta Selatan', type: 'client' },
+      { lat: -6.1070, lng: 106.7390, name: 'Bistecca — PIK Avenue', address: 'PIK Avenue Mall Ground Floor, Jl. Pantai Indah Utara I No. 6, Penjaringan, Jakarta Utara', type: 'client' },
+      { lat: -6.2410, lng: 106.7995, name: 'Sushi Hiro — Senopati', address: 'Jl. Suryo No.24, Senopati, Kebayoran Baru, Jakarta Selatan', type: 'client' },
+      { lat: -6.2255, lng: 106.7990, name: 'Sushi Hiro — Senayan City', address: 'Senayan City Mall Lantai 5, Jl. Asia Afrika, Jakarta Pusat', type: 'client' },
+      { lat: -6.2248, lng: 106.8090, name: 'Basque Bar de Tapas', address: 'Noble House 8th Floor, Jl. DR. Ide Anak Agung Gde Agung No.2, Mega Kuningan, Jakarta Selatan', type: 'client' },
+      { lat: -6.2460, lng: 106.7960, name: 'Loewy', address: 'Jl. Cibulan Raya, Petogogan, Kebayoran Baru, Jakarta Selatan', type: 'client' },
+      { lat: -6.2455, lng: 106.7970, name: 'Cork & Screw Country Club', address: 'Kawasan SCBD, Jakarta Selatan', type: 'client' },
+      { lat: -6.2258, lng: 106.7998, name: 'Milano Caffè — PIK Avenue', address: 'PIK Avenue Mall Ground Floor, Jl. Pantai Indah Kapuk Boulevard, Jakarta Utara', type: 'client' },
+      { lat: -6.2240, lng: 106.8100, name: 'Bar Luca', address: 'Kawasan SCBD, Jakarta Selatan', type: 'client' },
+    ];
+
+    const markers = L.markerClusterGroup({
+      maxClusterRadius: 50,
+      iconCreateFunction: function (cluster) {
+        const count = cluster.getChildCount();
+        return L.divIcon({
+          html: `<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(225,29,46,.9),rgba(179,18,31,.9));border:2.5px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px;font-family:Montserrat,sans-serif;box-shadow:0 6px 20px rgba(225,29,46,.6);">${count}</div>`,
+          className: 'custom-cluster', iconSize: [42, 42],
+        });
+      },
+    });
+
+    locations.forEach(loc => {
+      const isOffice = loc.type === 'office';
+      const marker = L.marker([loc.lat, loc.lng], { icon: isOffice ? officeIcon : outletIcon });
+      const popup = `
+        <div style="font-family:Inter,sans-serif;min-width:220px;padding:4px 2px;">
+          <div style="display:inline-block;padding:3px 10px;border-radius:99px;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;${isOffice ? 'background:rgba(225,29,46,.15);color:#E11D2E;border:1px solid rgba(225,29,46,.4);' : 'background:rgba(59,130,246,.15);color:#3B82F6;border:1px solid rgba(59,130,246,.4);'}">${isOffice ? 'Kantor Pusat' : 'Outlet Klien'}</div>
+          <div style="font-weight:700;font-size:14px;color:#111;line-height:1.3;margin-bottom:6px;">${loc.name}</div>
+          <div style="font-size:11.5px;color:#555;line-height:1.5;margin-bottom:${loc.phone ? '8px' : '0'};">${loc.address}</div>
+          ${loc.phone ? `<div style="font-size:11.5px;font-weight:600;color:#E11D2E;">📞 ${loc.phone}</div>` : ''}
+        </div>`;
+      marker.bindPopup(popup, { maxWidth: 280, className: 'custom-popup' });
+      marker.bindTooltip(loc.name, { direction: 'top', offset: [0, -12], className: 'custom-tooltip' });
+      markers.addLayer(marker);
+    });
+
+    map.addLayer(markers);
+    const allCoords = locations.map(l => [l.lat, l.lng]);
+    map.fitBounds(allCoords, { padding: [50, 50] });
+
+    map.on('click', () => map.scrollWheelZoom.enable());
+    map.on('mouseout', () => map.scrollWheelZoom.disable());
+  })();
 
 })();
 </script>
