@@ -23,14 +23,7 @@
     theme: {
       extend: {
         colors: {
-          jaga: {
-            red:   '#E11D2E',
-            dark:  '#B3121F',
-            deep:  '#7A0C15',
-            black: '#0B0B0D',
-            coal:  '#141419',
-            steel: '#1F1F26',
-          }
+          jaga: { red:'#E11D2E', dark:'#B3121F', deep:'#7A0C15', black:'#0B0B0D', coal:'#141419', steel:'#1F1F26' }
         },
         fontFamily: {
           sans:    ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
@@ -40,16 +33,12 @@
           marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
           floaty:  { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } }
         },
-        animation: {
-          marquee: 'marquee 45s linear infinite',
-          floaty:  'floaty 6s ease-in-out infinite',
-        }
+        animation: { marquee: 'marquee 45s linear infinite', floaty: 'floaty 6s ease-in-out infinite' }
       }
     }
   }
 </script>
 
-<!-- Leaflet -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
@@ -115,7 +104,7 @@
   .marquee-mask { -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
 
   #mobileMenu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s cubic-bezier(.22,1,.36,1), opacity .35s ease; }
-  #mobileMenu.open { max-height: 720px; opacity: 1; }
+  #mobileMenu.open { max-height: 820px; opacity: 1; }
 
   #toTop { opacity: 0; visibility: hidden; transform: translateY(14px); transition: all .4s cubic-bezier(.22,1,.36,1); }
   #toTop.show { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -125,7 +114,6 @@
   .hamburger.active .bar:nth-child(2) { opacity: 0; }
   .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* Leaflet Custom */
   #map { background: #141419; }
   .custom-popup .leaflet-popup-content-wrapper { background: #fff; border-radius: 14px; box-shadow: 0 18px 45px -15px rgba(0,0,0,.7); border: 1px solid rgba(0,0,0,.06); }
   .custom-popup .leaflet-popup-content { margin: 14px 16px; }
@@ -156,6 +144,7 @@
         <li><a href="#beranda" class="nav-link active">Beranda</a></li>
         <li><a href="#tentang" class="nav-link">Tentang Kami</a></li>
         <li><a href="#layanan" class="nav-link">Layanan</a></li>
+        <li><a href="#operasional" class="nav-link">Operasional</a></li>
         <li><a href="#portofolio" class="nav-link">Portofolio</a></li>
         <li><a href="#klien" class="nav-link">Klien</a></li>
         <li><a href="#peta" class="nav-link">Peta</a></li>
@@ -172,6 +161,7 @@
       <li><a href="#beranda" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Beranda</a></li>
       <li><a href="#tentang" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Tentang Kami</a></li>
       <li><a href="#layanan" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Layanan</a></li>
+      <li><a href="#operasional" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Operasional</a></li>
       <li><a href="#portofolio" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Portofolio</a></li>
       <li><a href="#klien" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Klien</a></li>
       <li><a href="#peta" class="mobile-link block py-3 text-sm font-medium text-white/75 hover:text-jaga-red border-b border-white/5 transition-colors">Peta</a></li>
@@ -351,7 +341,6 @@
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- 1 -->
       <article class="reveal card p-7">
         <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Konsultan Keamanan</h3>
@@ -364,7 +353,6 @@
           <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Penanggulangan Insiden</li>
         </ul>
       </article>
-      <!-- 2 -->
       <article class="reveal card p-7">
         <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Crowd Management &amp; Security Event</h3>
@@ -377,7 +365,6 @@
           <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Tanggapan Cepat (Rapid Response)</li>
         </ul>
       </article>
-      <!-- 3 -->
       <article class="reveal card p-7">
         <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Jasa Tenaga Lapangan</h3>
@@ -390,7 +377,6 @@
           <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Tanggap Cepat</li>
         </ul>
       </article>
-      <!-- 4 -->
       <article class="reveal card p-7">
         <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Unit K9 <span class="text-jaga-red">/ JBOM</span></h3>
@@ -403,7 +389,6 @@
           <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Penjagaan Gedung &amp; Fasilitas Publik</li>
         </ul>
       </article>
-      <!-- 5 -->
       <article class="reveal card p-7">
         <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/><path stroke-linecap="round" stroke-linejoin="round" d="M19 8H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Fasilitas Tenaga Medis</h3>
@@ -415,7 +400,6 @@
           <li class="flex gap-2.5 text-sm text-white/70"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span>Protokol Evakuasi ke Rumah Sakit</li>
         </ul>
       </article>
-      <!-- 6 -->
       <article class="reveal card p-7">
         <div class="icon-box mb-6"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
         <h3 class="font-display font-bold text-lg text-white mb-3">Fasilitas Keamanan</h3>
@@ -428,115 +412,238 @@
         </ul>
       </article>
     </div>
-    
-    <!-- ============ GALERI OPERASIONAL (FIXED) ============ -->
-    <div class="reveal mt-16">
-      <div class="mb-8">
-        <span class="eyebrow">Galeri</span>
-        <h3 class="font-display font-bold text-2xl sm:text-3xl text-white mt-4">Armada &amp; Personel JAGA INDONESIA</h3>
-        <p class="text-white/50 text-sm mt-2 max-w-2xl">Dokumentasi armada operasional, perlengkapan personel, serta kesiapan tim JAGA INDONESIA di lapangan.</p>
+
+    <div class="reveal mt-14 text-center">
+      <p class="text-white/50 text-sm mb-6">Butuh layanan keamanan yang disesuaikan dengan kebutuhan Anda?</p>
+      <a href="#kontak" class="btn-primary">
+        Konsultasi Gratis Sekarang
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPERASIONAL KAMI (SECTION TERPISAH) ============ -->
+<section id="operasional" class="relative py-24 sm:py-32 bg-jaga-black overflow-hidden">
+  <div class="red-glow w-[500px] h-[500px] bg-jaga-red/10 -top-20 left-1/4"></div>
+  <div class="absolute inset-0 grid-pattern opacity-15 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
+
+    <div class="max-w-3xl mb-20">
+      <span class="reveal eyebrow">Operasional Kami</span>
+      <h2 class="reveal font-display font-extrabold text-3xl sm:text-4xl lg:text-[2.85rem] leading-tight mt-5 mb-5">
+        Kesiapan Tim &amp; <span class="text-gradient-red">Armada di Lapangan</span>
+      </h2>
+      <p class="reveal text-white/60 leading-relaxed">
+        Setiap operasi dimulai dengan persiapan matang — dari armada medis, kendaraan operasional, perlengkapan personel, apel briefing, hingga penjagaan harian di outlet klien.
+      </p>
+    </div>
+
+    <!-- 01 — ARMADA MEDIS -->
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-24 lg:mb-32">
+      <div class="reveal order-2 lg:order-1">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="font-display font-extrabold text-5xl sm:text-6xl text-jaga-red/25 leading-none">01</span>
+          <span class="h-px flex-1 bg-gradient-to-r from-jaga-red/60 to-transparent max-w-[80px]"></span>
+          <span class="text-[.62rem] font-bold tracking-[.24em] uppercase text-white/40">Unit Medis</span>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight mb-5">
+          Ambulans Siaga <span class="text-gradient-red">24/7</span>
+        </h3>
+        <p class="text-white/60 leading-relaxed mb-8">
+          Unit ambulans JAGA INDONESIA dilengkapi peralatan medis standar gawat darurat untuk memastikan respons cepat saat terjadi insiden di lokasi event atau area pengamanan.
+        </p>
+        <ul class="space-y-3.5">
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Defibrillator &amp; Monitor Jantung</strong> — penanganan henti jantung mendadak</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Tandu &amp; Oksigen Portabel</strong> — stabilisasi pra-rumah sakit</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Tim Medis Profesional</strong> — dokter umum &amp; perawat siaga</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Protokol Evakuasi</strong> — rujukan cepat ke rumah sakit terdekat</span></li>
+        </ul>
       </div>
-    
-      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-    
-        <!-- 1. Ambulans + Mobil (PNG transparan — perlakuan khusus) -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 group aspect-[4/3] bg-gradient-to-br from-jaga-steel via-jaga-coal to-jaga-black relative">
-          <img src="https://i.ibb.co.com/N2q7tD4Q/ambulans-dan-mobil-jaga-event.png"
-               alt="Ambulans & mobil operasional JAGA INDONESIA"
-               class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-          <div class="absolute bottom-3 left-4 right-4 flex items-center gap-2 pointer-events-none">
-            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/70 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-md border border-white/10">Armada</span>
+      <div class="reveal order-1 lg:order-2">
+        <div class="rounded-3xl overflow-hidden border border-white/10 aspect-[4/3] bg-gradient-to-br from-jaga-steel via-jaga-coal to-jaga-black relative shadow-2xl shadow-black/50">
+          <img src="https://i.ibb.co.com/N2q7tD4Q/ambulans-dan-mobil-jaga-event.png" alt="Ambulans & mobil JAGA INDONESIA" class="w-full h-full object-contain p-8" loading="lazy" />
+          <div class="absolute bottom-4 left-5">
+            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/80 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-md border border-white/10">Unit Medis &amp; Operasional</span>
           </div>
         </div>
-    
-        <!-- 2. Mobil Operasional -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 group aspect-[4/3] relative">
-          <img src="https://i.ibb.co.com/bjB3RxHS/mobil-jaga-event.png"
-               alt="Mobil operasional JAGA INDONESIA"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90">Mobil Operasional</span>
+      </div>
+    </div>
+
+    <!-- 02 — MOBIL OPERASIONAL -->
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-24 lg:mb-32">
+      <div class="reveal order-1 lg:order-2">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="font-display font-extrabold text-5xl sm:text-6xl text-jaga-red/25 leading-none">02</span>
+          <span class="h-px flex-1 bg-gradient-to-r from-jaga-red/60 to-transparent max-w-[80px]"></span>
+          <span class="text-[.62rem] font-bold tracking-[.24em] uppercase text-white/40">Mobilitas</span>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight mb-5">
+          Armada <span class="text-gradient-red">Mobilitas Cepat</span>
+        </h3>
+        <p class="text-white/60 leading-relaxed mb-8">
+          Kendaraan operasional yang siap mendukung patroli, mobilisasi personel, dan tanggap cepat di seluruh area pengamanan — dengan identitas visual JAGA INDONESIA yang mudah dikenali.
+        </p>
+        <ul class="space-y-3.5">
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Patroli Area</strong> — pengawasan rutin wilayah klien</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Rapid Response</strong> — respons cepat saat insiden</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Mobilisasi Personel</strong> — distribusi tim &amp; logistik</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Radio Terpadu</strong> — komunikasi real-time dengan pusat komando</span></li>
+        </ul>
+      </div>
+      <div class="reveal order-2 lg:order-1">
+        <div class="rounded-3xl overflow-hidden border border-white/10 aspect-[4/3] shadow-2xl shadow-black/50 relative group">
+          <img src="https://i.ibb.co.com/bjB3RxHS/mobil-jaga-event.png" alt="Mobil operasional JAGA INDONESIA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          <div class="absolute bottom-4 left-5">
+            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-md border border-white/10">Fleet JAGA INDONESIA</span>
           </div>
         </div>
-    
-        <!-- 3. Perlengkapan -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 group aspect-[4/3] relative">
-          <img src="https://i.ibb.co.com/fdK668gp/perlengkapan-jaga.png"
-               alt="Perlengkapan personel JAGA INDONESIA"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90">Perlengkapan</span>
+      </div>
+    </div>
+
+    <!-- 03 — PERLENGKAPAN -->
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-24 lg:mb-32">
+      <div class="reveal order-2 lg:order-1">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="font-display font-extrabold text-5xl sm:text-6xl text-jaga-red/25 leading-none">03</span>
+          <span class="h-px flex-1 bg-gradient-to-r from-jaga-red/60 to-transparent max-w-[80px]"></span>
+          <span class="text-[.62rem] font-bold tracking-[.24em] uppercase text-white/40">Perlengkapan</span>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight mb-5">
+          Perlengkapan <span class="text-gradient-red">Standar Operasional</span>
+        </h3>
+        <p class="text-white/60 leading-relaxed mb-8">
+          Setiap personel JAGA INDONESIA dibekali peralatan keamanan bersertifikat sesuai Standar Operasional Prosedur (SOP) — memastikan kesiapan maksimal di lapangan.
+        </p>
+        <ul class="space-y-3.5">
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Fire Stop (APAR)</strong> — penanganan kebakaran awal</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Baton / Tongkat Keamanan</strong> — pengendalian situasi</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">HT (Handy Talky)</strong> — komunikasi real-time antar pos</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Metal Detector Garrett</strong> — deteksi senjata &amp; logam terlarang</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Hand Scanner</strong> — pemeriksaan badan &amp; barang bawaan</span></li>
+        </ul>
+      </div>
+      <div class="reveal order-1 lg:order-2">
+        <div class="rounded-3xl overflow-hidden border border-white/10 aspect-[4/3] shadow-2xl shadow-black/50 relative group">
+          <img src="https://i.ibb.co.com/fdK668gp/perlengkapan-jaga.png" alt="Perlengkapan personel JAGA INDONESIA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          <div class="absolute bottom-4 left-5">
+            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-md border border-white/10">Equipment Set</span>
           </div>
         </div>
-    
-        <!-- 4. Apel Personel -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 group aspect-[4/3] relative">
-          <img src="https://i.ibb.co.com/RT0pX9jB/jaga-personil-event-pdf.png"
-               alt="Apel personel JAGA INDONESIA"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90">Apel Personel</span>
+      </div>
+    </div>
+
+    <!-- 04 — APEL PERSONEL -->
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-24 lg:mb-32">
+      <div class="reveal order-1 lg:order-2">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="font-display font-extrabold text-5xl sm:text-6xl text-jaga-red/25 leading-none">04</span>
+          <span class="h-px flex-1 bg-gradient-to-r from-jaga-red/60 to-transparent max-w-[80px]"></span>
+          <span class="text-[.62rem] font-bold tracking-[.24em] uppercase text-white/40">Briefing</span>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight mb-5">
+          Apel &amp; <span class="text-gradient-red">Briefing Sebelum Bertugas</span>
+        </h3>
+        <p class="text-white/60 leading-relaxed mb-8">
+          Setiap operasi diawali dengan apel personel untuk memastikan kesiapan fisik, mental, dan koordinasi lapangan sebelum bertugas di lokasi event atau area pengamanan.
+        </p>
+        <ul class="space-y-3.5">
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Briefing Komandan Lapangan</strong> — arahan &amp; target pengamanan</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Cek Fisik &amp; Kelengkapan</strong> — verifikasi atribut &amp; peralatan</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Pembagian Pos &amp; Shift</strong> — penempatan personel sesuai kebutuhan</span></li>
+          <li class="flex gap-3 items-start text-sm text-white/75"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-jaga-red shrink-0"></span><span><strong class="text-white">Sinkronisasi SOP</strong> — protokol kontingensi &amp; jalur evakuasi</span></li>
+        </ul>
+      </div>
+      <div class="reveal order-2 lg:order-1">
+        <div class="rounded-3xl overflow-hidden border border-white/10 aspect-[4/3] shadow-2xl shadow-black/50 relative group">
+          <img src="https://i.ibb.co.com/RT0pX9jB/jaga-personil-event-pdf.png" alt="Apel personel JAGA INDONESIA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          <div class="absolute bottom-4 left-5">
+            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-md border border-white/10">Apel Personel</span>
           </div>
         </div>
-    
-        <!-- 5. Personel Outlet Bulk -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 group aspect-[4/3] relative">
-          <img src="https://i.ibb.co.com/rf2sQ4n8/jaga-personil-outlet-bulk.png"
-               alt="Personel di outlet klien"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90">Penjagaan Outlet</span>
+      </div>
+    </div>
+
+    <!-- 05 — PENJAGAAN OUTLET -->
+    <div class="mb-8">
+      <div class="reveal max-w-3xl mb-10">
+        <div class="flex items-center gap-4 mb-5">
+          <span class="font-display font-extrabold text-5xl sm:text-6xl text-jaga-red/25 leading-none">05</span>
+          <span class="h-px flex-1 bg-gradient-to-r from-jaga-red/60 to-transparent max-w-[80px]"></span>
+          <span class="text-[.62rem] font-bold tracking-[.24em] uppercase text-white/40">Daily Security</span>
+        </div>
+        <h3 class="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight mb-5">
+          Penjagaan <span class="text-gradient-red">Outlet &amp; Klien Harian</span>
+        </h3>
+        <p class="text-white/60 leading-relaxed">
+          Personel JAGA INDONESIA siaga menjaga restoran, lounge, dan venue klien di seluruh Jakarta — memastikan keamanan tamu, staf, dan aset secara profesional setiap hari.
+        </p>
+      </div>
+
+      <div class="reveal grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl overflow-hidden border border-white/10 aspect-square group relative">
+          <img src="https://i.ibb.co.com/rf2sQ4n8/jaga-personil-outlet-bulk.png" alt="Penjagaan outlet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute bottom-3 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span class="text-[.58rem] font-bold tracking-[.16em] uppercase text-white/90">Penjagaan Outlet</span>
           </div>
         </div>
-    
-        <!-- 6. Personel Outlet Bulk 2 -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 group aspect-[4/3] relative">
-          <img src="https://i.ibb.co.com/27jKwT2J/jaga-personil-outlet-bulk2.png"
-               alt="Personel di outlet klien"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90">Penjagaan Outlet</span>
+        <div class="rounded-2xl overflow-hidden border border-white/10 aspect-square group relative">
+          <img src="https://i.ibb.co.com/27jKwT2J/jaga-personil-outlet-bulk2.png" alt="Penjagaan outlet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute bottom-3 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span class="text-[.58rem] font-bold tracking-[.16em] uppercase text-white/90">Front Gate Security</span>
           </div>
         </div>
-    
-        <!-- 7. Personel Outlet -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 group aspect-[4/3] relative">
-          <img src="https://i.ibb.co.com/svZfcbvZ/jaga-personil-outlet.png"
-               alt="Personel di Bouchon"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90">Penjagaan Outlet</span>
+        <div class="rounded-2xl overflow-hidden border border-white/10 aspect-square group relative">
+          <img src="https://i.ibb.co.com/svZfcbvZ/jaga-personil-outlet.png" alt="Penjagaan outlet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute bottom-3 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span class="text-[.58rem] font-bold tracking-[.16em] uppercase text-white/90">Penjagaan Restoran</span>
           </div>
         </div>
-    
-        <!-- 8. Personel Outlet 2 -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 group aspect-[4/3] relative">
-          <img src="https://i.ibb.co.com/6cNmRfZx/jaga-personil-outlet2.png"
-               alt="Personel di area outdoor"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90">Pengamanan Area</span>
+        <div class="rounded-2xl overflow-hidden border border-white/10 aspect-square group relative">
+          <img src="https://i.ibb.co.com/6cNmRfZx/jaga-personil-outlet2.png" alt="Penjagaan outlet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute bottom-3 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span class="text-[.58rem] font-bold tracking-[.16em] uppercase text-white/90">Pengamanan Area</span>
           </div>
         </div>
-    
-        <!-- 9. Personel Event Indoor -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 group aspect-[4/3] relative">
-          <img src="https://i.ibb.co.com/PsSDywfH/jaga-personil-event-2.png"
-               alt="Personel di event"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-3 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="text-[.6rem] font-bold tracking-[.16em] uppercase text-white/90">Security Event</span>
+      </div>
+
+      <div class="reveal grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+        <div class="p-5 rounded-2xl bg-white/[.04] border border-white/10 hover:border-jaga-red/50 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-jaga-red/15 border border-jaga-red/40 flex items-center justify-center text-jaga-red mb-3">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
           </div>
+          <p class="text-sm font-semibold text-white mb-1">Access Control</p>
+          <p class="text-xs text-white/50 leading-relaxed">Pengaturan pintu masuk &amp; verifikasi tamu</p>
         </div>
-    
+        <div class="p-5 rounded-2xl bg-white/[.04] border border-white/10 hover:border-jaga-red/50 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-jaga-red/15 border border-jaga-red/40 flex items-center justify-center text-jaga-red mb-3">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </div>
+          <p class="text-sm font-semibold text-white mb-1">Patroli Area</p>
+          <p class="text-xs text-white/50 leading-relaxed">Pengawasan rutin seluruh area klien</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[.04] border border-white/10 hover:border-jaga-red/50 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-jaga-red/15 border border-jaga-red/40 flex items-center justify-center text-jaga-red mb-3">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <p class="text-sm font-semibold text-white mb-1">Manajemen Tamu</p>
+          <p class="text-xs text-white/50 leading-relaxed">Penyambutan &amp; pengarahan pengunjung</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/[.04] border border-white/10 hover:border-jaga-red/50 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-jaga-red/15 border border-jaga-red/40 flex items-center justify-center text-jaga-red mb-3">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <p class="text-sm font-semibold text-white mb-1">Koordinasi Klien</p>
+          <p class="text-xs text-white/50 leading-relaxed">Laporan langsung ke manajemen venue</p>
+        </div>
       </div>
     </div>
 
@@ -547,6 +654,7 @@
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
       </a>
     </div>
+
   </div>
 </section>
 
@@ -773,6 +881,7 @@
             <li><a href="#beranda" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Beranda</a></li>
             <li><a href="#tentang" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Tentang Kami</a></li>
             <li><a href="#layanan" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Layanan</a></li>
+            <li><a href="#operasional" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Operasional</a></li>
             <li><a href="#portofolio" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Portofolio</a></li>
             <li><a href="#klien" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Klien</a></li>
             <li><a href="#peta" class="text-sm text-white/55 hover:text-jaga-red transition-colors">Peta</a></li>
@@ -817,7 +926,6 @@
 (function () {
   'use strict';
 
-  // HEADER SCROLL
   const header = document.getElementById('header');
   const toTop = document.getElementById('toTop');
   function onScroll() {
@@ -829,7 +937,6 @@
   onScroll();
   toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // MOBILE MENU
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
   function closeMenu() {
@@ -846,7 +953,6 @@
   window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeMenu(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-  // SCROLL SPY
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
   const spy = new IntersectionObserver(entries => {
@@ -859,7 +965,6 @@
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   sections.forEach(s => spy.observe(s));
 
-  // REVEAL
   const revealObs = new IntersectionObserver((entries, obs) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
   }, { rootMargin: '0px 0px -80px 0px', threshold: 0.08 });
@@ -868,7 +973,6 @@
     revealObs.observe(el);
   });
 
-  // COUNTER
   const counterObs = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -890,7 +994,6 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-count]').forEach(c => counterObs.observe(c));
 
-  // PORTFOLIO FILTER
   const tabButtons = document.querySelectorAll('.tab-btn');
   const eventItems = document.querySelectorAll('.event-item');
   tabButtons.forEach(btn => {
@@ -911,7 +1014,6 @@
     });
   });
 
-  // SMOOTH SCROLL
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
@@ -925,11 +1027,9 @@
     });
   });
 
-  // YEAR
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // MAP
   (function initMap() {
     const mapEl = document.getElementById('map');
     if (!mapEl || typeof L === 'undefined') return;
