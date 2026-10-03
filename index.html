@@ -128,6 +128,46 @@
   .leaflet-control-zoom-out { border-radius: 0 0 8px 8px !important; border-top: none !important; }
   .leaflet-control-attribution { background: rgba(11,11,13,.75) !important; color: rgba(255,255,255,.45) !important; font-size: 9px !important; border-radius: 6px 0 0 0; }
   .leaflet-control-attribution a { color: rgba(225,29,46,.9) !important; }
+
+  /* ============ LOGO TILE (KLIEN) ============ */
+  .logo-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1.25rem;
+    min-height: 118px;
+    border-radius: 1rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+    border: 1px solid rgba(255,255,255,.08);
+    transition: all .4s cubic-bezier(.22,1,.36,1);
+    overflow: hidden;
+    position: relative;
+  }
+  .logo-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(225,29,46,.10), transparent 65%);
+    opacity: 0;
+    transition: opacity .4s ease;
+    pointer-events: none;
+  }
+  .logo-tile img {
+    max-width: 100%;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform .4s cubic-bezier(.22,1,.36,1);
+  }
+  .logo-tile:hover {
+    transform: translateY(-5px);
+    border-color: rgba(225,29,46,.65);
+    box-shadow: 0 22px 48px -24px rgba(225,29,46,.9);
+  }
+  .logo-tile:hover::after { opacity: 1; }
+  .logo-tile:hover img { transform: scale(1.06); }
+  .logo-tile--invert img { filter: invert(1) brightness(0.15); }
 </style>
 </head>
 
@@ -735,49 +775,48 @@
         Kami bangga menjadi mitra keamanan bagi berbagai restoran, lounge, hotel, klub, dan perusahaan ternama di Indonesia.
       </p>
     </div>
-    <div class="reveal grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
-      <div class="client-tile">The Union Group</div>
-      <div class="client-tile">Union</div>
-      <div class="client-tile">Loewy</div>
-      <div class="client-tile">Cork &amp; Screw</div>
-      <div class="client-tile">Cork &amp; Screw<br><span class="text-[.6rem] font-medium opacity-60">Country Club</span></div>
-      <div class="client-tile">Roma Osteria &amp; Bar</div>
-      <div class="client-tile">Bistecca</div>
-      <div class="client-tile">Sushi Hiro</div>
-      <div class="client-tile">Basque</div>
-      <div class="client-tile">Luca</div>
-      <div class="client-tile">Bar Luca</div>
-      <div class="client-tile">Oyster Dealer</div>
-      <div class="client-tile">Oasis<br><span class="text-[.6rem] font-medium opacity-60">Shisha Lounge</span></div>
-      <div class="client-tile">Williams<br><span class="text-[.6rem] font-medium opacity-60">Casual Dining</span></div>
-      <div class="client-tile">Subi</div>
-      <div class="client-tile">Pierre</div>
-      <div class="client-tile">Milano Caffè</div>
-      <div class="client-tile">3 Wise Monkeys</div>
-      <div class="client-tile">The Cocktail Club</div>
-      <div class="client-tile">Hurricane's Grill</div>
-      <div class="client-tile">Bengkel</div>
-      <div class="client-tile">Swillhouse</div>
-      <div class="client-tile">Bocaria</div>
-      <div class="client-tile">Exvi</div>
-      <div class="client-tile">Empirica</div>
-      <div class="client-tile">Bouchon</div>
-      <div class="client-tile">Bottom Parlour</div>
-      <div class="client-tile">Toby's Estate</div>
-      <div class="client-tile">Sake</div>
-      <div class="client-tile">Vin+</div>
-      <div class="client-tile">Zoo</div>
-      <div class="client-tile">Bibi Lobi</div>
-      <div class="client-tile">Azcco</div>
-      <div class="client-tile">Midaz<br><span class="text-[.6rem] font-medium opacity-60">Senayan Golf</span></div>
-      <div class="client-tile">Hernosa</div>
-      <div class="client-tile">Osteria G</div>
-      <div class="client-tile">Dreamville</div>
-      <div class="client-tile">Amavi</div>
-      <div class="client-tile">Publico</div>
-      <div class="client-tile">Cheong Dam<br><span class="text-[.6rem] font-medium opacity-60">Garden</span></div>
-      <div class="client-tile">Q Kopitiam</div>
-      <div class="client-tile">Skydance</div>
+
+    <div class="reveal grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+
+      <div class="logo-tile"><img src="https://i.tracxn.com/logo/company/ic_logo-union_1578033643056.png" alt="The Union Group" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2jWXXMK90PUZ8bZqPVDlCTnkrPkfaGTyVhcpKcWdSBs37HdjLqmb3uU8v&s=10" alt="Union" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8pWABoQt2OZnZZK0wlF9wFldUJtEKZB-bjO2pMlT7HQ&s" alt="Loewy" loading="lazy" /></div>
+      <div class="logo-tile logo-tile--invert"><img src="https://uniongroupjakarta.com/storage/567/CSCC_Logo_White.png" alt="Cork &amp; Screw" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://uniongroupjakarta.com/storage/470/cc-country-club.png" alt="Cork &amp; Screw Country Club" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://uniongroupjakarta.com/storage/673/Brand=img_roma,-Color=Black.png" alt="Roma Osteria &amp; Bar" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://uniongroupjakarta.com/storage/17/Bistecca_Logo_Black.png" alt="Bistecca" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjBRTIaoicI1a-Np3oFFNVR6FwHvaNCI4Pgp-cjI26eIx3OWUo_aD0WxEB&s=10" alt="Sushi Hiro" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://jakartapartyclub.com/wp-content/uploads/2024/04/basque-club-jakarta-logo.jpg" alt="Basque Bar de Tapas" loading="lazy" /></div>
+      <div class="logo-tile logo-tile--invert"><img src="https://uniongroupjakarta.com/storage/734/bar-luca-white.png" alt="Bar Luca" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH93fbhk0b8y27eYsNswECVPTr1KA6oQya9rkQboq6tnvUs5bq5veHECk&s=10" alt="Oyster Dealer" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQUAaEU2vXQEoqmlZ6GWI8UY0G5lmZwd4VAFAcogiSiyLE1KRBmRQYA6w&s=10" alt="Oasis Shisha Lounge" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://static.wixstatic.com/media/19f4e1_949d7e56688a4d36b24c34b1166e2ef3~mv2.png/v1/fill/w_240,h_240,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/William%E2%80%99s%20Casual%20Dining-01.png" alt="William's Casual Dining" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://subilounge.com/wp-content/uploads/2024/10/Subi-Private-Lounge-Logo.png" alt="Subi Private Lounge" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://uniongroupjakarta.com/storage/205/Pierre_Logo_Black.png" alt="Pierre" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://uniongroupjakarta.com/_next/image?url=https%3A%2F%2Funiongroupjakarta.com%2Fstorage%2F861%2FCAFFE-MILANO_LOG1)-copy.png&w=384&q=75" alt="Caffè Milano" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKOREOT47oEoCS-XZG_dXChsCbMXTdT_Dv8irU9HisQlKrXCq5uk5DG4I&s=10" alt="3 Wise Monkeys" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://uniongroupjakarta.com/storage/675/Brand=TCC,-Color=Black.png" alt="The Cocktail Club" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://hurricanesgrillrestaurants.com.au/wp-content/uploads/2019/03/logo_hurricane.png" alt="Hurricane's Grill" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://bengkelspace.id/cpanel/public/images/p_about/AVATAR%20-%20BENGKEL%20SPACE-01.png" alt="Bengkel Space" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1tMn8g_iYO2-uSSraoDrjs-81QnuVq6VLf7Co2iKqPnE4g4IGLG5d0Sjb&s=10" alt="Swillhouse" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIw5kRXOUPZXp0ZHkJJsM0XyKjkIXJVpYxgaxjLmoDWZPUvqW3tqbKIRei&s=10" alt="Bocarica" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS39WZTBAniZ0YaTREF-OWoiBWgijKsV8xbC-ZNNIpVO0tfzF9ddaj7IeyO&s=10" alt="Exvi" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://pbs.twimg.com/profile_images/905428839366508544/JoFNSDaJ_400x400.jpg" alt="Empirica" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://uniongroupjakarta.com/storage/1416/FINALLOGO-02.png" alt="Bouchon" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://uniongroupjakarta.com/storage/730/BOTTOM-PARLOUR-LOGO-BLACK.png" alt="Bottom Parlour" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://hublife.co.id/wp-content/uploads/2021/04/LOGO-TENANT4.jpg" alt="Toby's Estate" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://images.seeklogo.com/logo-png/61/2/sake-restaurant-bar-logo-png_seeklogo-612211.png" alt="Sake" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://play-lh.googleusercontent.com/LfWym46FyJaeUEWsGfG56j5pMIa7uwMA_gIIHj7H7mMbChlBglQZnHGkZEJgGT8_EI6frJmcLZnHSXhhZzPMMw" alt="Vin+" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://swillfam.com/assets/B5JbJ_8M.png" alt="Zoo" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7bSK_AqWbrtxE31twGo4qdJakomeEuSAOWdqttWRjHlT8xS-ow3fGAX_4&s=10" alt="Lobi Lobi" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://www.midaz.co.id/wp-content/uploads/2024/02/Logo-Midaz-1.png" alt="Midaz Senayan Golf" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://tuwaga.id/wp-content/uploads/2025/05/osteria-gia-1-1024x1024.png" alt="Osteria Gia" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/company-logo/13bf5708daff0c6f89d33fea4cb07b24.png" alt="Dreamville" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://amavicanggu.grandcentralgroup.co.id/assets/img/logo_amavicanggu_footer.png" alt="Amavi" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJLgqzbBjkv5mrltF6vhHy6oLe2v8atZ1wSNPEYPoJDvTMCzvUHX8rHDc&s=10" alt="Cheong Dam Garden" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://www.tangcitymall.com/wp-content/uploads/2023/08/qq.png" alt="QQ Kopitiam" loading="lazy" /></div>
+      <div class="logo-tile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSuUe3pLPQcWajL5eg9VqByKxUN2VRLxnTCcnETxQmNaB5CRXWosdnK6Sd&s=10" alt="Skydance" loading="lazy" /></div>
+
     </div>
   </div>
 </section>
